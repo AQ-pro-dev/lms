@@ -1,0 +1,11 @@
+.tutor-dashboard-footer-mobile {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  padding: 10px;
+  box-shadow: 0px 0px 16px rgba(176, 182, 209, 0.180862);
+  z-index: 9999999;
+}/*# sourceMappingURL=mobile-footer.css.map */

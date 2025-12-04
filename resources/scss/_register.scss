@@ -1,0 +1,120 @@
+.register {
+    .container-fluid {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        h1 {
+            position: relative;
+            display: inline-block;
+            padding: 28px 0px;
+            font-weight: 500;
+            font-size: 19px;
+            line-height: 28px;
+            letter-spacing: 4px;
+            text-align: center;
+            border-top: 2px solid #000;
+            border-bottom: 2px solid #000;
+            width: 100%;
+            max-width: 690px;
+        }
+        .register_text {
+            h2 {
+                padding-top: 54px;
+                font-size: 34px;
+                font-weight: 400;
+                line-height: 61px;
+            }
+            p {
+                font-size: 15px;
+                font-weight: 400;
+                line-height: 24px;
+                letter-spacing: 1px;
+            }
+        }
+
+        form {
+            .register_form {
+                h6 {
+                    font-size: 23px;
+                    font-weight: 700;
+                    line-height: 27px;
+                    letter-spacing: 1px;
+                    padding-top: 34px;
+                    padding-bottom: 39px;
+                }
+
+                .row {
+                    .col {
+                        input {
+                            padding: 10px 20px;
+                            border: 1px solid #00000099;
+                            outline: none;
+                            &:focus {
+                                box-shadow: none;
+                            }
+                        }
+                        select {
+                            border: 1px solid #00000099;
+                            padding: 10px;
+                            outline: none;
+                            &:focus {
+                                box-shadow: none;
+                            }
+                        }
+                    }
+                }
+                .d-flex {
+                    .button-primary {
+                        color: #fff;
+                        border: none;
+                        padding: 20px 0px;
+                        font-size: 20px;
+                        font-weight: 700;
+                        line-height: 20px;
+                        letter-spacing: 1px;
+                        letter-spacing: 0px;
+                        height: 60px;
+                    }
+                    .button-secondary {
+                        font-size: 19px;
+                        font-weight: 500;
+                        line-height: 24px;
+                        letter-spacing: -0.015em;
+                        color: $primary-color-v1;
+                        height: 60px;
+                    }
+                    margin-bottom: 55px;
+                }
+            }
+        }
+        @media screen and (max-width: 600px) {
+            .register_text {
+                h2 {
+                    font-size: 18px;
+                }
+                p {
+                    font-size: 12px;
+                }
+            }
+            form {
+                .d-flex {
+                    .button-primary {
+                        font-size: 14px !important;
+                    }
+                    .button-secondary {
+                        font-size: 14px !important;
+                        padding: 10px !important;
+                        img {
+                            height: 24px;
+                            width: 24px;
+                            display: inline-block;
+                        }
+                    }
+                    margin-bottom: 55px;
+                }
+            }
+        }
+    }
+}

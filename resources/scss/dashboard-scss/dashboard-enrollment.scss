@@ -1,0 +1,410 @@
+.view-enrollments {
+    border-left: 1px solid #b2b4b7;
+    flex: 1;
+    padding: 16px;
+
+    .enrollments {
+        // Adjust margins
+        margin: 0;
+
+        // Tutor Avatar section
+        .tutor-avatar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+
+            h6 {
+                font-size: 18px;
+                font-weight: 600;
+            }
+
+            img {
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+            }
+        }
+
+        // Date Input
+        .calendar-input {
+            padding: 8px;
+            width: 100%;
+            font-size: 14px;
+            border-radius: 4px;
+            border: 1px solid #ced4da;
+
+            &:focus {
+                border-color: #4caf50;
+                box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+            }
+        }
+
+        button {
+            width: max-content;
+        }
+
+        // Timezone Dropdown
+        .dropdown {
+            .btn-outline-secondary {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 12px;
+                width: 100%;
+                font-size: 14px;
+                color: #333;
+                background-color: #fff;
+                border: 1px solid #ced4da;
+                border-radius: 4px;
+                transition: border-color 0.2s ease-in-out;
+
+                &:hover,
+                &:focus {
+                    border-color: #4caf50;
+                }
+
+                .icon {
+                    margin-right: 8px;
+                    font-size: 16px;
+                }
+            }
+
+            .dropdown-menu {
+                width: 100%;
+                max-height: 200px;
+                overflow-y: auto;
+                padding: 8px;
+                border-radius: 4px;
+                border: 1px solid #e0e0e0;
+
+                // Input inside dropdown (for filtering)
+                input {
+                    width: calc(100% - 16px);
+                    margin: 0 8px;
+                    padding: 8px;
+                    border-radius: 4px;
+                    border: 1px solid #ced4da;
+
+                    &:focus {
+                        border-color: #4caf50;
+                        box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+                    }
+                }
+
+                .dropdown-item {
+                    padding: 8px 12px;
+                    font-size: 14px;
+                    color: #333;
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+
+                    &:hover {
+                        background-color: #f0f0f0;
+                    }
+
+                    // Active selected timezone
+                    &.active {
+                        background-color: #4caf50;
+                        color: white;
+                        font-weight: bold;
+                    }
+                }
+
+                .text-muted {
+                    padding: 8px 12px;
+                    font-size: 14px;
+                    color: #999;
+                }
+            }
+        }
+
+        // Calendar (Flatpickr) styles
+        .flatpickr-calendar {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+
+            .flatpickr-month {
+                display: flex;
+                justify-content: center;
+                font-size: 18px;
+                font-weight: bold;
+                color: #333;
+            }
+
+            .flatpickr-prev-month,
+            .flatpickr-next-month {
+                font-size: 20px;
+                color: #4caf50;
+
+                svg {
+                    fill: #4caf50;
+                }
+            }
+
+            .flatpickr-weekdays {
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+                font-weight: 600;
+                color: #333;
+            }
+
+            .flatpickr-day {
+                color: #333;
+                font-size: 14px;
+                padding: 10px;
+                margin: 5px;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                transition: background-color 0.3s ease;
+
+                &:hover {
+                    background-color: #f0f0f0;
+                    cursor: pointer;
+                }
+
+                &.selected {
+                    background-color: #4caf50;
+                    color: #fff;
+                    font-weight: bold;
+                    border-radius: 50%;
+                }
+
+                &.disabled,
+                &.disabled:hover {
+                    color: #ccc;
+                    background-color: transparent;
+                    cursor: not-allowed;
+                }
+
+                &.today {
+                    border: 2px solid #4caf50;
+                    color: #333;
+                }
+            }
+        }
+    }
+
+    .classes {
+        .table-responsive {
+            font-size: 14px;
+            border: 1px solid #cdcfd5;
+            border-radius: 7px;
+
+            table {
+                margin-bottom: 0 !important;
+
+                thead {
+                    th {
+                        background-color: #f1f1f1;
+                        font-weight: 700;
+                        color: #333;
+                        padding: 12px;
+                    }
+                }
+
+                tbody {
+                    tr {
+                        td {
+                            padding: 16px;
+                            vertical-align: top;
+                            border-bottom: 1px solid #cdcfd5;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .modal-body {
+        .enrollment-modal-details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            row-gap: 30px;
+
+            p {
+                font-size: 20px;
+                // margin-bottom: 25px;
+                width: 45%;
+
+                strong {
+                    text-transform: capitalize;
+                }
+
+                span {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    .modal-footer {
+        .icons {
+            .delete-icon {
+                color: #ff0000;
+                font-size: 16px;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+            .edit-icon {
+                color: #4caf50;
+                font-size: 16px;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .enrollments-table {
+        .table-responsive {
+            font-size: 14px;
+            border: 1px solid #cdcfd5;
+            border-radius: 7px;
+
+            table {
+                margin-bottom: 0 !important;
+
+                thead {
+                    th {
+                        background-color: #f1f1f1;
+                        font-weight: 700;
+                        color: #333;
+                        padding: 12px;
+                    }
+                }
+
+                tbody {
+                    tr {
+                        td {
+                            padding: 16px;
+                            vertical-align: top;
+                            border-bottom: 1px solid #cdcfd5;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .view-btn,
+    .attendee-btn {
+        background-color: transparent;
+        color: #104627;
+        font-size: 18px;
+        cursor: pointer;
+        transition: color 0.3s ease;
+        border: none;
+        margin: 0 4px;
+    }
+    // Responsive adjustments
+    @media (max-width: 992px) {
+        .enrollments {
+            .tutor-avatar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        .dropdown {
+            .btn-outline-secondary {
+                font-size: 12px;
+                padding: 8px;
+            }
+
+            .dropdown-menu {
+                input {
+                    font-size: 12px;
+                    padding: 6px;
+                }
+
+                .dropdown-item {
+                    font-size: 12px;
+                    padding: 6px;
+                }
+            }
+        }
+    }
+
+    .nav-tabs {
+        border-bottom: none;
+
+        .nav-item {
+            .nav-link {
+                color: #212327;
+                font-weight: 400;
+                margin-right: 16px;
+                padding: 8px 16px;
+                border: none;
+                outline: none;
+                background: none;
+                transition: none;
+                cursor: pointer;
+
+                &:hover,
+                &:focus {
+                    color: $primary-color;
+                    background: none;
+                    box-shadow: none;
+                    border-bottom: none;
+                }
+
+                &.active {
+                    border-bottom: 2px solid $primary-color;
+                }
+            }
+        }
+    }
+
+    .tab-content {
+        position: relative;
+
+        .tab-pane {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+
+            &.active {
+                opacity: 1;
+                visibility: visible;
+                animation: fadeIn 0.5s forwards;
+            }
+
+            &.fade-out {
+                animation: fadeOut 0.5s forwards;
+                visibility: hidden;
+            }
+        }
+    }
+
+    // Keyframe animations for fade transitions
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeOut {
+        0% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
+}

@@ -1,0 +1,33 @@
+.CourseRequest {
+    border-left: 1px solid #b2b4b7;
+    flex: 1;
+
+    .table-responsive {
+        font-size: 14px;
+        border: 1px solid #cdcfd5;
+        border-radius: 7px;
+
+        table {
+            margin-bottom: 0 !important;
+
+            thead {
+                th {
+                    background-color: #f1f1f1;
+                    font-weight: 700;
+                    color: #333;
+                    padding: 12px;
+                }
+            }
+
+            tbody {
+                tr {
+                    td {
+                        padding: 16px;
+                        vertical-align: top;
+                        border-bottom: 1px solid #cdcfd5;
+                    }
+                }
+            }
+        }
+    }
+}

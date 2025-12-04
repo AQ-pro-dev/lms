@@ -1,0 +1,1140 @@
+// .dashboard-head {
+//     .tutor-data {
+//         border-bottom: 1px solid #b2b4b7;
+
+//         .tutor-info {
+//             .tutor-avatar {
+//                 max-width: 100%;
+
+//                 img {
+//                     width: 96px;
+//                     height: 96px;
+//                     object-fit: cover;
+//                     border-radius: 50%;
+//                 }
+//                 span {
+//                     font-size: 20px;
+//                     font-weight: 400;
+//                     line-height: 32px;
+//                 }
+//                 b {
+//                     font-size: 24px;
+//                     font-weight: 500;
+//                     line-height: 38px;
+//                     color: #212327;
+//                 }
+//             }
+//         }
+//         .tutor-notification-request {
+//             .offcanvas-btn {
+//                 border: 0;
+//                 background-color: #fff;
+//                 padding: 15px;
+//                 border-radius: 50%;
+//                 display: flex;
+//                 align-items: center;
+//                 justify-content: center;
+//                 transition: all 0.3s ease-in-out;
+//                 i {
+//                     font-size: 20px;
+//                     color: $primary-color;
+//                 }
+
+//                 &:hover {
+//                     background-color: $primary-color;
+
+//                     i {
+//                         color: #fff;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+// .dashboard-sidebar {
+//     .sidebar {
+//         width: max-content;
+
+//         ul {
+//             padding: 0;
+
+//             li {
+//                 a {
+//                     color: $primary-color;
+//                     font-size: 16px;
+//                     font-weight: 400;
+//                     line-height: 30px;
+//                     padding: 8px 30px;
+//                     border-radius: 5px 0 0 5px;
+
+//                     &:hover {
+//                         background-color: rgb(33 35 39 / 6%);
+//                     }
+
+//                     &:first-child {
+//                         margin-top: 10px;
+//                     }
+
+//                     i {
+//                         margin-right: 10px;
+//                     }
+
+//                     &.active {
+//                         background-color: $primary-color;
+//                         color: #fff;
+
+//                         i {
+//                             color: #fff;
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+// .dashboard {
+//     border-left: 2px solid #b2b4b7;
+
+//     .course-detail {
+//         .course-box {
+//             border: 1px solid #cdcfd5;
+//             padding: 32px 100px;
+//             border-radius: 7px;
+
+//             .course-box-icon {
+//                 padding: 20px;
+//                 background-color: #e7ece9;
+//                 display: flex;
+//                 align-items: center;
+//                 justify-content: center;
+//                 border-radius: 50%;
+
+//                 i {
+//                     font-size: 26px;
+//                     color: $primary-color;
+//                 }
+//             }
+
+//             .number {
+//                 font-size: 32px;
+//                 line-height: 50px;
+//                 font-weight: 700;
+//             }
+
+//             span {
+//                 font-size: 14px;
+//                 font-weight: 400;
+//                 line-height: 20px;
+//                 color: #41454f;
+//             }
+//         }
+//     }
+//     .tutor-course-info {
+//         .course-box {
+//             border: 1px solid #cdcfd5;
+//             padding: 32px 200px;
+//             border-radius: 7px;
+
+//             .course-box-icon {
+//                 padding: 20px;
+//                 background-color: #e7ece9;
+//                 display: flex;
+//                 align-items: center;
+//                 justify-content: center;
+//                 border-radius: 50%;
+
+//                 i {
+//                     font-size: 26px;
+//                     color: $primary-color;
+//                 }
+//             }
+
+//             .number {
+//                 font-size: 32px;
+//                 line-height: 50px;
+//                 font-weight: 700;
+//             }
+
+//             span {
+//                 font-size: 14px;
+//                 font-weight: 400;
+//                 line-height: 20px;
+//                 color: #41454f;
+//             }
+//         }
+//     }
+
+//     .course-progress {
+//         .inner {
+//             border: 1px solid #cdcfd5;
+//             border-radius: 5px;
+
+//             .progress-course-img {
+//                 img {
+//                     max-width: 100%;
+//                     width: 100%;
+//                     object-fit: cover;
+//                 }
+//             }
+
+//             .progress-course-detail {
+//                 .progress-course-rating {
+//                     i {
+//                         margin-left: 4px;
+//                     }
+//                 }
+
+//                 h4 {
+//                     font-size: 20px;
+//                     line-height: 24px;
+//                     font-weight: 500;
+//                 }
+
+//                 .lessons-complete {
+//                     font-size: 14px;
+//                     font-weight: 400;
+//                     line-height: 22px;
+//                     color: #757c8e;
+
+//                     span {
+//                         font-size: 14px;
+//                         line-height: 22px;
+//                         font-weight: 500;
+//                         color: #212327;
+//                     }
+//                 }
+//             }
+
+//             .course-progress-bar {
+//                 progress {
+//                     width: 100%;
+//                 }
+
+//                 p {
+//                     margin: 0;
+//                     font-size: 14px;
+//                     line-height: 22px;
+//                     font-weight: 500;
+//                     color: #757c8e;
+
+//                     span {
+//                         color: #212327;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+//     .tutor-course-detail {
+//         table {
+//             border: 1px solid #cdcfd5;
+//             border-radius: 6px;
+//         }
+//     }
+// }
+// .help-request {
+//     border-left: 1px solid #b2b4b7;
+
+//     .help-request-alert {
+//         border: 1px solid #b2b4b7;
+//         border-radius: 6px;
+
+//         .help-request-content {
+//             background-color: #ececec;
+//             padding: 30px;
+
+//             .alert-text {
+//                 p {
+//                     margin: 0;
+//                 }
+//             }
+//         }
+//     }
+
+//     .helprequest-form {
+//         label {
+//             font-size: 16px;
+//             font-weight: 500;
+//             line-height: 24px;
+//             color: #232323;
+//         }
+
+//         .custom-file-input input[type="file"] {
+//             display: none; // Hide the real file input
+//         }
+//     }
+
+//     .help-request-review {
+//         .help-request-head {
+//             border: 1px solid #b2b4b7;
+//             border-radius: 6px;
+
+//             .request-icon {
+//                 padding: 22px;
+//                 background-color: #e7ece9;
+//                 display: flex;
+//                 align-items: center;
+//                 justify-content: center;
+//                 border-radius: 50%;
+
+//                 i {
+//                     font-size: 26px;
+//                     color: $primary-color;
+//                 }
+//             }
+
+//             .input-group {
+//                 i {
+//                     color: #fff;
+//                     background: $primary-color;
+//                     padding: 10px 18px;
+//                     right: 0;
+//                 }
+//             }
+//         }
+
+//         .help-request-body {
+//             border: 1px solid #b2b4b7;
+//             border-radius: 6px;
+
+//             table {
+//                 tr {
+//                     th {
+//                         font-size: 14px;
+//                         line-height: 21px;
+//                         font-weight: 500;
+//                         color: #2b2b2b;
+//                         color: #2b2b2b;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+// .view-enrollments {
+//     border-left: 1px solid #b2b4b7;
+//     flex: 1;
+//     padding: 16px;
+//     .enrollments {
+//         // Adjust margins
+//         margin: 0;
+
+//         // Tutor Avatar section
+//         .tutor-avatar {
+//             display: flex;
+//             align-items: center;
+//             gap: 10px;
+//             margin-bottom: 20px;
+
+//             h6 {
+//                 font-size: 18px;
+//                 font-weight: 600;
+//             }
+
+//             img {
+//                 border-radius: 50%;
+//                 width: 50px;
+//                 height: 50px;
+//             }
+//         }
+
+//         // Date Input
+//         .calendar-input {
+//             padding: 8px;
+//             width: 100%;
+//             font-size: 14px;
+//             border-radius: 4px;
+//             border: 1px solid #ced4da;
+
+//             &:focus {
+//                 border-color: #4caf50;
+//                 box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+//             }
+//         }
+
+//         // Timezone Dropdown
+//         .dropdown {
+//             .btn-outline-secondary {
+//                 display: flex;
+//                 justify-content: space-between;
+//                 align-items: center;
+//                 padding: 10px 12px;
+//                 width: 100%;
+//                 font-size: 14px;
+//                 color: #333;
+//                 background-color: #fff;
+//                 border: 1px solid #ced4da;
+//                 border-radius: 4px;
+//                 transition: border-color 0.2s ease-in-out;
+
+//                 &:hover,
+//                 &:focus {
+//                     border-color: #4caf50;
+//                 }
+
+//                 .icon {
+//                     margin-right: 8px;
+//                     font-size: 16px;
+//                 }
+//             }
+
+//             .dropdown-menu {
+//                 width: 100%;
+//                 max-height: 200px;
+//                 overflow-y: auto;
+//                 padding: 8px;
+//                 border-radius: 4px;
+//                 border: 1px solid #e0e0e0;
+
+//                 // Input inside dropdown (for filtering)
+//                 input {
+//                     width: calc(100% - 16px);
+//                     margin: 0 8px;
+//                     padding: 8px;
+//                     border-radius: 4px;
+//                     border: 1px solid #ced4da;
+
+//                     &:focus {
+//                         border-color: #4caf50;
+//                         box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+//                     }
+//                 }
+
+//                 .dropdown-item {
+//                     padding: 8px 12px;
+//                     font-size: 14px;
+//                     color: #333;
+//                     cursor: pointer;
+//                     transition: background-color 0.3s;
+
+//                     &:hover {
+//                         background-color: #f0f0f0;
+//                     }
+
+//                     // Active selected timezone
+//                     &.active {
+//                         background-color: #4caf50;
+//                         color: white;
+//                         font-weight: bold;
+//                     }
+//                 }
+
+//                 .text-muted {
+//                     padding: 8px 12px;
+//                     font-size: 14px;
+//                     color: #999;
+//                 }
+//             }
+//         }
+
+//         // Calendar (Flatpickr) styles
+//         .flatpickr-calendar {
+//             background-color: #fff;
+//             border-radius: 8px;
+//             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+//             border: 1px solid #e0e0e0;
+
+//             .flatpickr-month {
+//                 display: flex;
+//                 justify-content: center;
+//                 font-size: 18px;
+//                 font-weight: bold;
+//                 color: #333;
+//             }
+
+//             .flatpickr-prev-month,
+//             .flatpickr-next-month {
+//                 font-size: 20px;
+//                 color: #4caf50;
+
+//                 svg {
+//                     fill: #4caf50;
+//                 }
+//             }
+
+//             .flatpickr-weekdays {
+//                 display: grid;
+//                 grid-template-columns: repeat(7, 1fr);
+//                 font-weight: 600;
+//                 color: #333;
+//             }
+
+//             .flatpickr-day {
+//                 color: #333;
+//                 font-size: 14px;
+//                 padding: 10px;
+//                 margin: 5px;
+//                 width: 40px;
+//                 height: 40px;
+//                 display: flex;
+//                 justify-content: center;
+//                 align-items: center;
+//                 border-radius: 50%;
+//                 transition: background-color 0.3s ease;
+
+//                 &:hover {
+//                     background-color: #f0f0f0;
+//                     cursor: pointer;
+//                 }
+
+//                 &.selected {
+//                     background-color: #4caf50;
+//                     color: #fff;
+//                     font-weight: bold;
+//                     border-radius: 50%;
+//                 }
+
+//                 &.disabled,
+//                 &.disabled:hover {
+//                     color: #ccc;
+//                     background-color: transparent;
+//                     cursor: not-allowed;
+//                 }
+
+//                 &.today {
+//                     border: 2px solid #4caf50;
+//                     color: #333;
+//                 }
+//             }
+//         }
+//     }
+
+//     // Responsive adjustments
+//     @media (max-width: 992px) {
+//         .enrollments {
+//             .tutor-avatar {
+//                 flex-direction: column;
+//                 align-items: flex-start;
+//             }
+//         }
+
+//         .dropdown {
+//             .btn-outline-secondary {
+//                 font-size: 12px;
+//                 padding: 8px;
+//             }
+
+//             .dropdown-menu {
+//                 input {
+//                     font-size: 12px;
+//                     padding: 6px;
+//                 }
+
+//                 .dropdown-item {
+//                     font-size: 12px;
+//                     padding: 6px;
+//                 }
+//             }
+//         }
+//     }
+// }
+
+// .profile {
+//     // flex: 1;
+//     border-left: 2px solid #b2b4b7;
+
+//     h2 {
+//         margin-top: 32px;
+//         font-size: 24px;
+//         font-weight: 500;
+//         line-height: 32px;
+//     }
+
+//     .profile-details {
+//         list-style-type: none;
+//         padding: 0;
+
+//         li {
+//             display: flex;
+//             justify-content: space-between;
+//             padding: 19px 0px;
+
+//             .label {
+//                 font-size: 18px;
+//                 font-weight: 400;
+//                 line-height: 32px;
+//                 margin-right: 115px;
+//             }
+
+//             .value {
+//                 font-size: 18px;
+//                 font-weight: 500;
+//                 line-height: 32px;
+//             }
+//         }
+//     }
+// }
+// .wishlist {
+//     border-left: 2px solid #b2b4b7;
+
+//     .wishlist-cards {
+//         display: flex;
+//         flex-wrap: wrap;
+//         gap: 20px;
+//     }
+
+//     .card {
+//         border: 1px solid #cccccc;
+//         flex: 1 1 300px;
+//         max-width: 250px;
+//         margin-bottom: 20px;
+//         padding: 10px;
+
+//         .card-img-top {
+//             position: relative;
+
+//             img {
+//                 border-radius: 9px;
+//                 object-fit: cover;
+//                 max-width: 100%;
+//             }
+
+//             i {
+//                 position: absolute;
+//                 top: 9px;
+//                 right: 7px;
+//                 z-index: 10;
+//                 background-color: #fff;
+//                 color: #104627;
+//                 padding: 12px;
+//                 border-radius: 50%;
+//                 filter: drop-shadow(1px 3px 4px rgba(0, 0, 0, 0.621));
+//                 width: 30px;
+//                 height: 30px;
+//                 display: flex;
+//                 align-items: center;
+//                 justify-content: center;
+//                 cursor: pointer;
+//                 transition: background-color 0.5s ease, color 0.5s ease;
+
+//                 &:hover {
+//                     background-color: $primary-color;
+//                     color: #fff;
+//                 }
+//             }
+//         }
+
+//         .card-body {
+//             display: flex;
+//             gap: 10px;
+//             flex-direction: column;
+
+//             .tutor-ratings i {
+//                 color: #eea015;
+//             }
+
+//             h5 {
+//                 font-size: 16px;
+//                 font-weight: 500;
+//                 line-height: 19px;
+//                 color: #212327;
+//             }
+
+//             .tutor-meta-wrapper {
+//                 .tutor-data {
+//                     img {
+//                         height: 36px;
+//                         width: 36px;
+//                         border-radius: 50%;
+//                         object-fit: contain;
+//                     }
+
+//                     small {
+//                         font-size: 12px;
+//                         color: #757c8e;
+//                         font-weight: 400;
+//                         line-height: 19px;
+//                     }
+
+//                     span {
+//                         font-size: 10px;
+//                         line-height: 19px;
+//                         font-weight: 500;
+//                         color: #212327;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+// .course-section {
+//     h2 {
+//         font-size: 24px;
+//         font-weight: 500;
+//         line-height: 32px;
+//     }
+
+//     .nav-tabs {
+//         border-bottom: none;
+
+//         .nav-item {
+//             .nav-link {
+//                 color: #212327;
+//                 font-weight: 400;
+//                 margin-right: 16px;
+//                 padding: 8px 16px;
+//                 border: none;
+//                 outline: none;
+//                 background: none;
+//                 transition: none;
+//                 &:hover,
+//                 &:focus {
+//                     color: $primary-color;
+//                     background: none;
+//                     box-shadow: none;
+//                     border-bottom: none;
+//                 }
+
+//                 &.active {
+//                     border-bottom: 2px solid $primary-color;
+//                 }
+//             }
+//         }
+//     }
+
+//     .tab-content {
+//         margin-top: 24px;
+//     }
+
+//     .enrolled-cards {
+//         display: flex;
+//         flex-wrap: wrap;
+//         gap: 20px;
+//     }
+
+//     .card {
+//         border-radius: 15px;
+//         border: none;
+//         width: 100%;
+//         max-width: 320px;
+//         margin-bottom: 20px;
+
+//         .card-img-top {
+//             border-top-left-radius: 15px;
+//             border-top-right-radius: 15px;
+
+//             img {
+//                 width: 100%;
+//                 object-fit: cover;
+//                 border-radius: 15px 15px 0 0;
+//             }
+//         }
+
+//         .card-body {
+//             padding: 1rem;
+
+//             h5 {
+//                 font-size: 16px;
+//                 font-weight: 500;
+//                 line-height: 19px;
+//             }
+
+//             .tutor-ratings i {
+//                 color: #eea015;
+//                 margin-right: 0.2rem;
+//             }
+
+//             p {
+//                 margin-bottom: 0.5rem;
+//                 font-size: 14px;
+//                 color: #757c8e;
+//             }
+
+//             .progress {
+//                 height: 5px;
+//                 background-color: #e9ecef;
+
+//                 .progress-bar {
+//                     background-color: $primary-color;
+//                 }
+//             }
+
+//             .button-primary {
+//                 display: inline-block;
+//                 font-size: 12px;
+//                 font-weight: 500;
+//                 line-height: 19px;
+
+//                 &:hover {
+//                     background-color: darken($primary-color, 10%);
+//                 }
+//             }
+//         }
+//     }
+// }
+// .settings {
+//     .nav-tabs {
+//         border-bottom: none;
+
+//         .nav-item {
+//             margin-right: 16px;
+
+//             .nav-link {
+//                 color: #000;
+//                 border: none;
+//                 outline: none;
+//                 font-weight: 500;
+//                 padding: 8px 16px;
+//                 background-color: transparent;
+//                 transition: color 0.3s ease;
+//                 &.active {
+//                     border-bottom: 2px solid $primary-color;
+//                 }
+//             }
+//         }
+//     }
+
+//     .tab-content {
+//         margin-top: 32px;
+
+//         .tab-pane {
+//             &.active,
+//             &.fade {
+//                 animation: fadeIn 0.5s ease-in-out;
+//             }
+
+//             @keyframes fadeIn {
+//                 from {
+//                     opacity: 0;
+//                 }
+//                 to {
+//                     opacity: 1;
+//                 }
+//             }
+//         }
+
+//         /* Cover photo wrapper */
+//         .cover-photo-wrapper {
+//             position: relative;
+//             overflow: hidden;
+
+//             .cover-photo {
+//                 width: 100%;
+//                 border-radius: 10px;
+//                 max-height: 300px;
+//                 object-fit: cover;
+//                 transition: transform 0.3s ease-in-out;
+//             }
+
+//             .delete-cover-photo {
+//                 position: absolute;
+//                 top: 10px;
+//                 right: 10px;
+//                 background-color: rgba(0, 0, 0, 0.6);
+//                 color: #fff;
+//                 border-radius: 50%;
+//                 padding: 16px;
+//                 cursor: pointer;
+//                 opacity: 0;
+//                 transition: opacity 0.3s ease;
+//             }
+//             &:hover .cover-photo {
+//                 transform: scale(1.05);
+//             }
+
+//             &:hover .delete-cover-photo {
+//                 opacity: 1;
+//             }
+//         }
+
+//         /* Profile photo wrapper */
+//         .profile-photo-wrapper {
+//             position: relative;
+//             display: inline-block;
+//             margin-top: -80px;
+//             margin-bottom: 32px;
+//             overflow: hidden;
+//             text-align: center;
+//             margin-left: 60px;
+
+//             .profile-photo {
+//                 width: 150px;
+//                 height: 150px;
+//                 border-radius: 50%;
+//                 border: 4px solid #fff;
+//                 object-fit: cover;
+//                 transition: transform 0.3s ease-in-out;
+//             }
+
+//             .delete-profile-photo {
+//                 position: absolute;
+//                 bottom: 10px;
+//                 left: 50%;
+//                 transform: translateX(-50%);
+//                 background-color: rgba(0, 0, 0, 0.6);
+//                 color: #fff;
+//                 border-radius: 50%;
+//                 padding: 8px;
+//                 cursor: pointer;
+//                 opacity: 0;
+//                 transition: opacity 0.3s ease;
+//             }
+//             &:hover .profile-photo {
+//                 transform: scale(1.05);
+//             }
+
+//             &:hover .delete-profile-photo {
+//                 opacity: 1;
+//             }
+//         }
+
+//         form {
+//             .form-row {
+//                 display: flex;
+//                 flex-wrap: wrap;
+
+//                 .col-md-6 {
+//                     flex: 0 0 50%;
+//                     max-width: 50%;
+//                     padding-right: 16px;
+//                     margin-bottom: 24px;
+
+//                     label {
+//                         font-size: 14px;
+//                         font-weight: 400;
+//                         line-height: 25.6px;
+//                     }
+
+//                     .form-control {
+//                         padding: 12px 16px;
+//                         border: 1px solid #000;
+//                         border-radius: 5px;
+//                         box-shadow: none;
+//                         outline: none;
+//                     }
+//                 }
+//             }
+
+//             .form-group {
+//                 margin-bottom: 24px;
+
+//                 label {
+//                     font-size: 14px;
+//                     font-weight: 400;
+//                     line-height: 25.6px;
+//                 }
+
+//                 .form-control {
+//                     padding: 12px 16px;
+//                     border: none;
+//                     box-shadow: none;
+//                     outline: none;
+//                     border-radius: 5px;
+//                     border: 1px solid #000;
+//                 }
+
+//                 textarea.form-control {
+//                     min-height: 150px;
+//                     resize: vertical;
+//                 }
+
+//                 select.form-control {
+//                     padding: 12px 16px;
+//                     border: none;
+//                     background-color: #f5f5f5;
+//                     width: 50%; /* Keep this for larger screens */
+//                     box-shadow: none;
+//                 }
+//             }
+
+//             .public-name-info {
+//                 font-size: 17px;
+//                 font-weight: 300;
+//                 margin-bottom: 16px;
+//                 max-width: 560px;
+//                 line-height: 26px;
+//             }
+//         }
+//     }
+
+//     @media (max-width: 768px) {
+//         padding: 0 1rem;
+
+//         .tab-content {
+//             .cover-photo-wrapper,
+//             .profile-photo-wrapper {
+//                 .cover-photo {
+//                     min-height: 200px;
+//                 }
+//             }
+
+//             .profile-photo-wrapper {
+//                 margin: 0 auto;
+//                 display: flex;
+//                 margin-top: -50px;
+//                 justify-content: center;
+
+//                 .profile-photo {
+//                     width: 120px;
+//                     height: 120px;
+//                 }
+//             }
+
+//             form {
+//                 .form-row {
+//                     flex-direction: column; /* Stack elements vertically */
+//                     align-items: stretch; /* Ensure elements stretch to fill width */
+
+//                     .col-md-6 {
+//                         flex: 0 0 100%; /* Stack to full width */
+//                         max-width: 100%;
+//                         padding-right: 0; /* Remove right padding */
+//                         margin-bottom: 16px; /* Adjust margin for spacing */
+//                     }
+//                 }
+
+//                 .form-group {
+//                     select.form-control {
+//                         width: 100%; /* Set select to full width */
+//                     }
+//                 }
+//             }
+//         }
+//     }
+//     .password {
+//         input {
+//             max-width: 652px;
+//             border: 0.7px solid #00000037 !important;
+//             // border-radius: 5px;
+//         }
+//     }
+//     .social-profile {
+//         label {
+//             font-size: 16px;
+//             font-weight: 400;
+//             color: #212327;
+//             display: flex;
+//             align-items: center;
+
+//             i {
+//                 color: #1a1b1e;
+//                 font-size: 18px;
+//                 margin-right: 8px; // Space between icon and text
+//             }
+//         }
+
+//         input.form-control {
+//             font-size: 16px;
+//             color: #6c757d;
+//             border: 1px solid #ddd;
+//             border-radius: 5px;
+//             padding: 8px 12px;
+//         }
+//     }
+// }
+// .tutor-dashboard-footer-mobile {
+//     display: none;
+//     position: fixed;
+//     left: 0;
+//     right: 0;
+//     bottom: 0;
+//     background: #fff;
+//     padding: 10px;
+//     box-shadow: 0px 0px 16px rgba(176, 182, 209, 0.180862);
+//     z-index: 9999999;
+// }
+// @media (max-width: 768px) {
+//     .dashboard,
+//     .wishlist,
+//     .settings,
+//     .course-section,
+//     .help-request,
+//     .profile,
+//     .view-enrollments {
+//         border: none;
+//     }
+//     .dashboard-main {
+//         flex-direction: column;
+//     }
+//     .dashboard-sidebar {
+//         display: none;
+//     }
+//     .dashboard-sidebar {
+//         &.visible {
+//             display: block;
+//             margin: 0 auto;
+//         }
+//     }
+//     .courses-info-section {
+//         .course-detail {
+//             .course-box {
+//                 width: 100%;
+//             }
+//         }
+//         .tutor-course-info {
+//             .course-box {
+//                 width: 100%;
+//             }
+//         }
+//     }
+
+//     .helprequest-form {
+//         .button-primary {
+//             margin-left: 0 !important;
+//         }
+//     }
+//     .tutor-dashboard-footer-mobile {
+//         display: block;
+//     }
+//     .dashboar-head {
+//         .tutor-notification-request {
+//             margin-left: 90px;
+//         }
+//     }
+//     .button-primary {
+//         padding: 12px 22px !important;
+//     }
+//     .button-secondary {
+//         padding: 12px 22px !important;
+//     }
+// }
+// @media (max-width: 576px) {
+//     .enrollments {
+//         .tutor-avatar {
+//             h6 {
+//                 font-size: 16px;
+//             }
+//         }
+
+//         .calendar-input {
+//             font-size: 12px;
+//         }
+
+//         .dropdown {
+//             .btn-outline-secondary {
+//                 font-size: 12px;
+//             }
+
+//             .dropdown-menu {
+//                 .dropdown-item {
+//                     font-size: 12px;
+//                 }
+//             }
+//         }
+//     }
+//     .dashboard-head {
+//         .tutor-info {
+//             .tutor-avatar {
+//                 img {
+//                     width: 50px;
+//                     height: 50px;
+//                 }
+//                 li {
+//                     b {
+//                         font-size: 16px !important;
+//                         line-height: 26px !important;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+// @media screen and (max-width: 456px) {
+//     .help-request-alert {
+//         padding: 5px !important;
+//     }
+// }
+// @media screen and (max-width: 320px) {
+//     .button-secondary {
+//         padding: 5px !important;
+//     }
+// }

@@ -1,0 +1,101 @@
+.help-request {
+    border-left: 1px solid #b2b4b7;
+
+    .help-request-alert {
+        border: 1px solid #b2b4b7;
+        border-radius: 6px;
+
+        .help-request-content {
+            background-color: #ececec;
+            padding: 30px;
+
+            .alert-text {
+                p {
+                    margin: 0;
+                }
+            }
+        }
+    }
+
+    .helprequest-form {
+        label {
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 24px;
+            color: #232323;
+            cursor: pointer;
+        }
+
+        .custom-file-input input[type="file"] {
+            display: none; // Hide the real file input
+        }
+    }
+
+    .help-request-review {
+        .help-request-head {
+            border: 1px solid #b2b4b7;
+            border-radius: 6px;
+
+            .request-icon {
+                padding: 22px;
+                background-color: #e7ece9;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+
+                i {
+                    font-size: 26px;
+                    color: $primary-color;
+                }
+            }
+
+            .input-group {
+                i {
+                    color: #fff;
+                    background: $primary-color;
+                    padding: 10px 18px;
+                    right: 0;
+                }
+            }
+        }
+
+        .help-request-body {
+            border: 1px solid #b2b4b7;
+            border-radius: 6px;
+
+            table {
+                tr {
+                    th {
+                        font-size: 14px;
+                        line-height: 21px;
+                        font-weight: 500;
+                        color: #2b2b2b;
+                        color: #2b2b2b;
+                        border-bottom: 1px solid #b2b4b7 !important;
+                    }
+                }
+
+                tbody {
+                    tr {
+                        &:last-child {
+                            border-bottom: none !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        .help-request-review {
+            .help-request-head {
+                .request-text {
+                    h4 {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+}

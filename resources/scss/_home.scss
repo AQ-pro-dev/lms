@@ -1,0 +1,366 @@
+.home {
+    .hero-section {
+        background-repeat: no-repeat;
+        /* No repetition */
+        background-size: cover;
+        /* Resize the background image to cover the entire container */
+        background-position: center;
+        background-attachment: fixed;
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+            background: rgba($color: #000000, $alpha: 0.5);
+        }
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+        }
+
+        h3 {
+            font-size: 19px;
+            font-weight: 500;
+            line-height: 28px;
+            letter-spacing: 4px;
+            color: #fff;
+            border-top: 2px solid #fff;
+            border-bottom: 2px solid #fff;
+            padding: 10px 0;
+            width: 70%;
+            margin: 0 auto;
+            margin-top: 120px !important;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 63px;
+            font-weight: 700;
+            line-height: 75px;
+            color: #fff;
+        }
+
+        .hero-cta-btn {
+            a {
+                color: #fff;
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 28px;
+                letter-spacing: 1px;
+                line-height: 16px;
+                background: $primary-color;
+                padding: 18px;
+                margin-bottom: 150px;
+            }
+        }
+    }
+
+    .featured-content {
+        margin: 80px 0;
+
+        h2 {
+            font-size: 48px;
+            font-weight: 500;
+            line-height: 60px;
+            letter-spacing: 5%;
+            color: #1e1e1e;
+            margin-bottom: 60px;
+            position: relative;
+
+            &::before {
+                content: "";
+                height: 8px;
+                width: 90px;
+                position: absolute;
+                left: 0;
+                bottom: -5px;
+                background-color: #f4461f;
+            }
+            span {
+                // border-bottom: 4px solid $primary-color;
+            }
+        }
+
+        .featured-cards {
+            .card {
+                border-radius: 25px;
+                margin: 40px 20px;
+                border: none;
+
+                .card-img-top {
+                    img {
+                        border-radius: 30px;
+                        object-fit: cover;
+                        padding: 15px;
+                    }
+                }
+
+                .card-body {
+                    margin-bottom: 20px;
+                    display: flex;
+                    flex-flow: column;
+                    min-height: 341px;
+                    justify-content: end;
+                }
+
+                h5 {
+                    color: $primary-color;
+                    font-size: 18px;
+                    font-weight: 600;
+                    line-height: 28px;
+                    letter-spacing: 1px;
+                    padding: 10px 0;
+                }
+
+                p {
+                    font-size: 16px;
+                    font-weight: 400;
+                    line-height: 22px;
+                    color: #1e1e1e;
+                    margin-bottom: 40px !important;
+                }
+            }
+
+            .swiper-button-prev {
+                margin: 0 !important;
+                top: 0;
+                top: 0;
+                left: 0;
+                width: unset;
+
+                &::after {
+                    font-size: 13px;
+                    font-weight: 700;
+                    color: #fff;
+                    background-color: #104627;
+                    padding: 15px 18px;
+                    border-radius: 50%;
+                }
+            }
+
+            .swiper-button-next {
+                margin: 0 !important;
+                top: 0;
+                top: 0;
+                left: 0;
+                width: unset;
+
+                &::after {
+                    font-size: 13px;
+                    font-weight: 700;
+                    color: #fff;
+                    background-color: #104627;
+                    padding: 15px 18px;
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+
+    .Learning-Benefits {
+        .benifits {
+            max-width: 50%;
+
+            h6 {
+                color: $primary-color;
+            }
+
+            h2 {
+                font-size: 46px;
+                font-weight: 600;
+                line-height: 43px;
+                color: #161616;
+            }
+
+            p {
+                font-size: 16px;
+                line-height: 16px;
+                line-height: 30px;
+                color: #6b6b6b;
+            }
+
+            .sub-beifits {
+                img {
+                    width: 35px;
+                    height: 46px;
+                    object-fit: contain;
+                }
+
+                span {
+                    font-size: 18px;
+                    line-height: 34px;
+                    color: #2d2d2d;
+                    font-weight: 600;
+                }
+            }
+        }
+
+        .benifit-img {
+            max-width: 50%;
+
+            img {
+                width: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+
+    // .news-letter {
+    //     margin: 20px 0;
+    //     .row {
+    //         margin: 120px 0;
+    //     }
+    //     .news-letter-content {
+    //         h6 {
+    //             font-weight: 600;
+    //             font-size: 32px;
+    //             line-height: 34px;
+    //             letter-spacing: 3px;
+    //             color: #161616;
+    //         }
+    //         p {
+    //             font-weight: 400;
+    //             font-size: 20px;
+    //             line-height: 24px;
+    //             color: #000;
+    //         }
+    //         input {
+    //             background-color: #fff;
+    //             border: 1px solid #ced4da;
+    //             border-radius: 4px;
+    //             padding: 10px;
+    //             &:focus-visible {
+    //                 outline: none;
+    //             }
+    //         }
+    //         button {
+    //             width: max-content;
+    //             margin: 0 auto;
+    //         }
+    //     }
+    // }
+    @media (max-width: 992px) {
+        .hero-section {
+            h1 {
+                font-size: 40px;
+            }
+
+            .hero-cta-btn {
+                a {
+                    margin-bottom: 50px;
+                }
+            }
+        }
+
+        .Learning-Benefits {
+            .benifits {
+                max-width: 100%;
+            }
+
+            .benifit-img {
+                max-width: 100%;
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        .hero-section {
+            h3 {
+                font-size: 14px;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+
+            .hero-cta-btn {
+                a {
+                    margin-bottom: 20px;
+                    color: #fff;
+                    font-size: 10px;
+                    font-weight: 400;
+                    line-height: 10px;
+                    background: #104627;
+                    padding: 10px;
+                }
+            }
+        }
+
+        .Learning-Benefits {
+            .benifits {
+                h2 {
+                    font-size: 20px;
+                }
+
+                p {
+                    font-size: 14px;
+                    line-height: 20px;
+                }
+
+                .sub-beifits {
+                    span {
+                        font-size: 11px;
+                    }
+                }
+            }
+        }
+
+        // .news-letter {
+        //     .news-letter-content {
+        //         h6 {
+        //             font-size: 20px;
+        //         }
+        //         p {
+        //             font-size: 14px;
+        //         }
+        //     }
+        // }
+    }
+
+    @media (max-width: 576px) {
+        .hero-section {
+            h3 {
+                font-size: 10px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            .hero-cta-btn {
+                a {
+                    margin-bottom: 20px;
+                }
+            }
+        }
+
+        .featured-content {
+            .featured-cards {
+                .card {
+                    .card-body {
+                        h5 {
+                            font-size: 16px;
+                        }
+
+                        p {
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 450px) {
+        .featured-content {
+            h2 {
+                font-size: 28px;
+                margin-bottom: 10px;
+            }
+        }
+    }
+}

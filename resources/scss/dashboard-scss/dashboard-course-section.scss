@@ -1,0 +1,106 @@
+.course-section {
+    border-left: 2px solid #b2b4b7;
+    h2 {
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 32px;
+    }
+
+    .nav-tabs {
+        border-bottom: none;
+
+        .nav-item {
+            .nav-link {
+                color: #212327;
+                font-weight: 400;
+                margin-right: 16px;
+                padding: 8px 16px;
+                border: none;
+                outline: none;
+                background: none;
+                transition: none;
+                &:hover,
+                &:focus {
+                    color: $primary-color;
+                    background: none;
+                    box-shadow: none;
+                    border-bottom: none;
+                }
+
+                &.active {
+                    border-bottom: 2px solid $primary-color;
+                }
+            }
+        }
+    }
+
+    .tab-content {
+        margin-top: 24px;
+    }
+
+    .enrolled-cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .card {
+        border-radius: 15px;
+        border: none;
+        width: 100%;
+        max-width: 320px;
+        margin-bottom: 20px;
+
+        .card-img-top {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+
+            img {
+                width: 100%;
+                object-fit: cover;
+                border-radius: 15px 15px 0 0;
+            }
+        }
+
+        .card-body {
+            padding: 1rem;
+
+            h5 {
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 19px;
+            }
+
+            .tutor-ratings i {
+                color: #eea015;
+                margin-right: 0.2rem;
+            }
+
+            p {
+                margin-bottom: 0.5rem;
+                font-size: 14px;
+                color: #757c8e;
+            }
+
+            .progress {
+                height: 5px;
+                background-color: #e9ecef;
+
+                .progress-bar {
+                    background-color: $primary-color;
+                }
+            }
+
+            .button-primary {
+                display: inline-block;
+                font-size: 12px;
+                font-weight: 500;
+                line-height: 19px;
+
+                &:hover {
+                    background-color: darken($primary-color, 10%);
+                }
+            }
+        }
+    }
+}

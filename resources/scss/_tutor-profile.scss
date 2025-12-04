@@ -1,0 +1,201 @@
+.tutor-profile {
+    .card {
+        border-radius: 25px;
+        &:hover {
+            transform: scale(1.05);
+            transition: all 0.3s ease-in-out;
+        }
+        border: none;
+        .card-img-top {
+            position: relative;
+            img {
+                border-radius: 30px;
+                object-fit: cover;
+                padding: 10px;
+                max-width: 100%;
+                position: relative;
+            }
+            i {
+                position: absolute;
+                top: 9px;
+                right: 7px;
+                z-index: 10;
+                background-color: #fff;
+                color: #104627;
+                padding: 12px;
+                border-radius: 50%;
+                filter: drop-shadow(1px 3px 4px rgba(0, 0, 0, 0.621));
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                &:hover {
+                    background-color: $primary-color;
+                    color: #fff;
+                    cursor: pointer;
+                    transition: all 0.5s ease;
+                }
+            }
+        }
+        .card-body {
+            min-height: 400px;
+            display: flex;
+            flex-flow: column;
+            justify-content: space-around;
+            .tutor-meta-wrapper {
+                .tutor-data {
+                    img {
+                        height: 36px;
+                        width: 36px;
+                        object-fit: cover;
+                        border-radius: 50%;
+                    }
+                    small {
+                        font-size: 12px;
+                        font-weight: 400;
+                        line-height: 19px;
+                        color: #757c8e;
+                    }
+                    span {
+                        font-size: 14px;
+                        font-weight: 500;
+                        line-height: 22px;
+                        color: #212327;
+                    }
+                }
+            }
+            .tutor-meta-icon {
+                .meta-icon {
+                    i {
+                        color: $secondary-color;
+                        font-size: 10px;
+                    }
+                    span {
+                        font-size: 12px;
+                        font-weight: 500;
+                        line-height: 19px;
+                        color: #212327;
+                    }
+                }
+            }
+        }
+        .post-details {
+            font-size: 13px;
+        }
+        h5 {
+            color: $primary-color;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 28px;
+            letter-spacing: 1px;
+            padding: 10px 0;
+        }
+        p {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 20px;
+            color: #1e1e1e;
+            // margin-bottom: 20px !important;
+        }
+    }
+    .banner {
+        .profile-details {
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            // height: ;
+        }
+        .profile {
+            margin-bottom: -50%;
+            border-radius: 10px;
+            border-radius: 10px;
+            img {
+                border: 10px solid #fff;
+                border-radius: 10px;
+                height: 275px;
+                width: 235px;
+                object-fit: cover;
+                object-position: center;
+                max-width: 100%;
+            }
+        }
+        .banner-image {
+            min-height: 360px;
+            background-position: center center;
+            display: flex;
+            flex-flow: column;
+            justify-content: end;
+            padding: 0 30px;
+            position: relative;
+            &::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                height: 70%;
+                background-image: linear-gradient(
+                    transparent,
+                    rgba(0, 0, 0, 0.6)
+                );
+            }
+        }
+    }
+    .tutor-profile-content {
+        .profile-details-mobile {
+            .profile-details {
+                color: #757575;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                // height: ;
+            }
+            .profile {
+                // margin-bottom: -50%;
+                border-radius: 10px;
+                img {
+                    border: 10px solid #fff;
+                    border-radius: 10px;
+                    height: 275px;
+                    width: 235px;
+                    object-fit: cover;
+                    object-position: center;
+                    max-width: 100%;
+                }
+            }
+            .profile-details {
+                h3 {
+                    color: #000;
+                }
+                p {
+                    span {
+                        color: #000;
+                    }
+                }
+            }
+        }
+    }
+    @media screen and (max-width: 992px) {
+        .banner {
+            .row {
+                display: none;
+            }
+        }
+        .tutor-profile-content {
+            margin-top: -150px;
+        }
+    }
+    @media screen and (max-width: 576px) {
+        .tutor-profile-content {
+            .tutor-user-profile-content {
+                p {
+                    font-size: 12px;
+                    line-height: 20px;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+}

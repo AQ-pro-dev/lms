@@ -1,0 +1,134 @@
+.student-view {
+    flex: 1;
+    .cover-picture {
+        background: url(https://fhrclmsprddev.wpenginepowered.com/wp-content/uploads/2024/02/chapelhill.jpg)
+            no-repeat center center/cover;
+        border-radius: 6px;
+        height: 268px;
+        position: relative;
+    }
+    .profile-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        position: absolute;
+        bottom: -20px;
+        left: 20px;
+
+        @media (max-width: 991px) {
+            flex-direction: column;
+            left: 50%;
+            bottom: -200px;
+            transform: translateX(-50%);
+            width: 100%;
+            text-align: center;
+            gap: 20px;
+        }
+
+        .profile-image {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 8px solid white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            object-fit: cover;
+            object-position: center center;
+            background: #104627;
+            @media (max-width: 991px) {
+                width: 130px;
+                height: 130px;
+            }
+        }
+        .profile-content {
+            strong {
+                font-weight: 600;
+                font-size: 40px;
+                line-height: 48px;
+                color: #fff;
+                @media (max-width: 991px) {
+                    color: #000;
+                }
+            }
+            ul {
+                display: flex;
+                align-items: center;
+                gap: 40px;
+                list-style-type: disc;
+                @media (max-width: 1199px) {
+                    flex-direction: column;
+                    gap: 10px;
+                    align-items: start;
+                }
+                @media (max-width: 991px) {
+                    list-style-type: none;
+                    gap: 0px;
+                    align-items: center;
+                }
+                li {
+                    &::marker {
+                        color: #fff;
+                    }
+
+                    a {
+                        font-size: 14px;
+                        line-height: 1.6;
+                        color: #fff;
+                        @media (max-width: 991px) {
+                            color: #212327;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .table-wrapper {
+        @media (max-width: 991px) {
+            margin-top: 235px;
+        }
+        .card-table table {
+            min-width: 100%;
+            ul {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-top: 5px;
+
+                li {
+                    color: #757c8e;
+                    span {
+                        color: #212327;
+                        @media (max-width: 991px) {
+                            font-size: 12px;
+                        }
+                    }
+                }
+            }
+            .progress-wrapper {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                @media (max-width: 1399px) {
+                    display: block;
+                }
+                .progres-bar {
+                    align-items: center;
+                    min-width: 100%;
+                    .progress {
+                        height: 5px;
+                        width: 100%;
+                        background: gray;
+                    }
+                }
+            }
+        }
+    }
+
+    .sm-btn {
+        padding: 5px 12px;
+        @media (max-width: 991px) {
+            line-height: 10px !important;
+        }
+    }
+}

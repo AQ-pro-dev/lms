@@ -1,0 +1,93 @@
+.wishlist {
+    border-left: 2px solid #b2b4b7;
+
+    .wishlist-cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .card {
+        border: 1px solid #cccccc;
+        flex: 1 1 300px;
+        max-width: 300px;
+        margin-bottom: 20px;
+        padding: 10px;
+
+        .card-img-top {
+            position: relative;
+
+            img {
+                border-radius: 9px;
+                object-fit: cover;
+                max-width: 100%;
+            }
+
+            i {
+                position: absolute;
+                top: 9px;
+                right: 7px;
+                z-index: 10;
+                background-color: #fff;
+                color: #104627;
+                padding: 12px;
+                border-radius: 50%;
+                filter: drop-shadow(1px 3px 4px rgba(0, 0, 0, 0.621));
+                width: 30px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: background-color 0.5s ease, color 0.5s ease;
+
+                &:hover {
+                    background-color: $primary-color;
+                    color: #fff;
+                }
+            }
+        }
+
+        .card-body {
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+
+            .tutor-ratings i {
+                color: #eea015;
+            }
+
+            h5 {
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 19px;
+                color: #212327;
+            }
+
+            .tutor-meta-wrapper {
+                .tutor-data {
+                    img {
+                        height: 36px;
+                        width: 36px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+
+                    small {
+                        font-size: 12px;
+                        color: #757c8e;
+                        font-weight: 400;
+                        line-height: 19px;
+                    }
+
+                    span {
+                        font-size: 10px;
+                        line-height: 19px;
+                        font-weight: 500;
+                        color: #212327;
+                    }
+                }
+            }
+        }
+    }
+}

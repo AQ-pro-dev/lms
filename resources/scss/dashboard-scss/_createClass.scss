@@ -1,0 +1,81 @@
+.class_form {
+    header.custom-header {
+        position: sticky;
+        top: 0;
+        background-color: #fff;
+        border-bottom: 1px solid #c0c3cb;
+        z-index: 40;
+
+        .container-fluid {
+            .header-wrapper {
+                justify-content: space-between;
+                align-items: center;
+
+                .actions {
+                    display: flex;
+                    align-items: center;
+
+                    .btn {
+                        font-size: 16px;
+                        font-weight: 400;
+                        line-height: 22px;
+
+                        &.button-submit {
+                            background-color: $primary-color;
+                            color: #fff;
+
+                            &:hover {
+                                background-color: darken($primary-color, 3);
+                            }
+                        }
+
+                        a.custom-close-link {
+                            padding: 10px;
+
+                            i {
+                                color: $primary-color;
+                            }
+
+                            &:hover {
+                                background-color: #c0c3cb;
+                                border-radius: 50%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .main-class-form {
+        .card-header {
+            background: #0e3c22;
+        }
+    }
+
+    .custom-upload-tips-list {
+        list-style: none;
+        padding: 0;
+
+        li {
+            font-size: 16px;
+            line-height: 24px;
+            position: relative;
+            padding-left: 25px;
+            color: #555;
+            margin-bottom: 20px;
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+                width: 8px;
+                height: 8px;
+                background-color: $primary-color;
+                border-radius: 50%;
+            }
+        }
+    }
+}

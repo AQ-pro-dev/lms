@@ -1,0 +1,204 @@
+.recorded-lecture {
+    .top-bar {
+        ul {
+            li {
+                i {
+                    color: #ff7450;
+                }
+            }
+        }
+
+        .back {
+            i {
+                cursor: pointer;
+                color: $primary-color !important;
+            }
+        }
+
+        .video-player {
+            color: #564ffd;
+        }
+    }
+
+    .lecture {
+        .iframe-container {
+            width: 100%;
+
+            iframe {
+                border-radius: 10px;
+                height: 500px;
+                max-width: 100%;
+                width: 100%;
+            }
+        }
+
+        ul {
+            li {
+                span {
+                    font-size: 16px;
+                    font-weight: 500;
+                }
+            }
+        }
+
+        .course-details-tabs {
+            .nav-tabs {
+                border-top: 1px solid #ced4da;
+
+                .nav-link {
+                    border: none !important;
+                    color: #666;
+
+                    &.active {
+                        border: none !important;
+                        border-bottom: 1.6px solid #ff6636 !important;
+                        background-color: transparent;
+                        color: #ff6636;
+                    }
+                }
+            }
+
+            #comments {
+                .comment-avatar {
+                    img {
+                        height: 50px;
+                        width: 50px;
+                        border-radius: 50%;
+                    }
+                }
+
+                .comment-textarea {
+                    flex: 1;
+                    position: relative;
+
+                    textarea {
+                        border: 1px solid #666;
+                    }
+
+                    &::before {
+                        content: "";
+                        display: block;
+                        height: 9px;
+                        width: 10px;
+                        background-color: #fff;
+                        border: 1px solid #666;
+                        position: absolute;
+                        left: -3px;
+                        top: 18px;
+                        clip-path: polygon(0% 0%, 100% 100%, 0% 100%);
+                        transform: rotate(45deg);
+                        border-radius: 0 0 0 3px;
+                    }
+                }
+
+                .button-primary {
+                    float: right;
+                }
+            }
+        }
+
+        .lectures-detail {
+            // width: 30%;
+            max-width: 100%;
+
+            progress {
+                width: 100%;
+                height: 5px;
+                border: none;
+                border-radius: 10px;
+                overflow: hidden;
+
+                &::-webkit-progress-bar {
+                    background-color: #f3f3f3;
+                    border-radius: 10px;
+                }
+
+                &::-webkit-progress-value {
+                    background-color: $primary-color;
+                    border-radius: 10px;
+                }
+
+                &::-moz-progress-bar {
+                    background-color: $primary-color;
+                    border-radius: 10px;
+                }
+            }
+
+            .accordion {
+                .accordion-item {
+                    .accordion-button {
+                        background-color: transparent;
+                        box-shadow: none;
+                        border-bottom: 1px solid #ced4da;
+
+                        &:hover {
+                            color: $primary-color;
+                        }
+                    }
+
+                    .accordion-button {
+                        &:not(.collapsed) {
+                            span {
+                                color: #ff6636 !important;
+                            }
+                        }
+                    }
+
+                    .accordion-body {
+                        i {
+                            color: #666 !important;
+                        }
+
+                        &:hover {
+                            background-color: #ffeee8 !important;
+
+                            i {
+                                color: #ff6636 !important;
+                            }
+                        }
+                    }
+
+                    input[type="radio"] {
+                        accent-color: $primary-color;
+                        /* Change to your desired color */
+                    }
+
+                    ul {
+                        margin: 0;
+                        padding: 0;
+                        font-size: 12px;
+                        font-weight: 400;
+
+                        li {
+                            i {
+                                color: #ff7450;
+                            }
+                        }
+                    }
+
+                    .video-player {
+                        color: #564ffd;
+                    }
+                }
+            }
+        }
+    }
+
+    /* Add hover effect for stars */
+    .rating i {
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+
+    .rating i:hover,
+    .rating i.active {
+        color: #f39c12;
+        /* Gold color for active stars */
+    }
+
+    /* Optional: change the color of the stars when they are selected */
+    .rating .bi-star-fill {
+        color: #f39c12;
+        /* Gold color for filled stars */
+    }
+}

@@ -1,0 +1,109 @@
+.announcements {
+    flex: 1;
+    border-left: 1px solid #DCDFE5;
+
+    .announcement-card {
+        border: 1px solid #00000040;
+        border-radius: 6px;
+
+        .announcement-icon {
+            padding: 20px;
+            border-radius: 50%;
+            background-color: #E7ECE9;
+
+            i {
+                font-size: 24px;
+                color: $primary-color;
+            }
+        }
+
+        .announcement-text {
+            span {
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 22px;
+                color: #808080;
+            }
+
+            p {
+                margin: 0;
+                font-size: 20px;
+                font-weight: 500;
+                line-height: 22px;
+                color: #000;
+            }
+        }
+    }
+
+    .filter-courses {
+        .dropdown {
+            .dropdown-toggle {
+                width: 100%;
+                border: 1px solid #cdcfd5;
+                border-radius: 6px;
+                background-color: transparent;
+                padding: 6px 12px;
+            }
+
+            .dropdown-menu {
+                .input-group {
+                    i {
+                        z-index: 10;
+                        left: 0px;
+                        top: 10px;
+                        padding: 0 5px;
+                        color: #757C8E;
+                    }
+
+                    input {
+                        margin-bottom: 8px;
+                        width: 100%;
+                        padding-left: 25px;
+                    }
+                }
+
+                // width: max-content !important;
+            }
+        }
+    }
+    .announcment-table{
+        overflow-x: scroll;
+        border-radius: 6px;
+        table{
+            thead{
+                td{
+                    background-color:#F4F6F9 ;
+                }
+            }
+        }
+    }
+    @media screen and (max-width: 768px) {
+        .announcement-card {
+            // border: 1px solid #00000040;
+            // border-radius: 6px;
+
+            .announcement-icon {
+                padding: 20px;
+                border-radius: 50%;
+                background-color: #E7ECE9;
+
+                i {
+                    font-size: 24px;
+                    color: $primary-color;
+                }
+            }
+
+            .announcement-text {
+                span {
+                    font-size: 12px;
+                    font-weight: 400;
+                }
+
+                p {
+                    font-size: 14px;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+}

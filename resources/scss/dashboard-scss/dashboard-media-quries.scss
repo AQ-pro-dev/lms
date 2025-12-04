@@ -1,0 +1,106 @@
+@media (max-width: 992px) {
+    .dashboard,
+    .wishlist,
+    .settings,
+    .course-section,
+    .help-request,
+    .profile,
+    .view-enrollments {
+        border: none;
+    }
+    .dashboard-main {
+        flex-direction: column;
+    }
+    .dashboard-sidebar {
+        display: none;
+    }
+    .dashboard-sidebar {
+        &.visible {
+            display: block;
+            margin: 0 auto;
+        }
+    }
+    .courses-info-section {
+        .course-detail {
+            .course-box {
+                width: 100%;
+            }
+        }
+        .tutor-course-info {
+            .course-box {
+                width: 100%;
+            }
+        }
+    }
+
+    .helprequest-form {
+        .button-primary {
+            margin-left: 0 !important;
+        }
+    }
+    .tutor-dashboard-footer-mobile {
+        display: block;
+    }
+    .dashboar-head {
+        .tutor-notification-request {
+            margin-left: 90px;
+        }
+    }
+    .button-primary {
+        padding: 12px 22px !important;
+    }
+    .button-secondary {
+        padding: 12px 22px !important;
+    }
+}
+@media (max-width: 576px) {
+    .enrollments {
+        .tutor-avatar {
+            h6 {
+                font-size: 16px;
+            }
+        }
+
+        .calendar-input {
+            font-size: 12px;
+        }
+
+        .dropdown {
+            .btn-outline-secondary {
+                font-size: 12px;
+            }
+
+            .dropdown-menu {
+                .dropdown-item {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+    .dashboard-head {
+        .tutor-info {
+            .tutor-avatar {
+                img {
+                    width: 50px;
+                    height: 50px;
+                }
+                li {
+                    b {
+                        font-size: 16px !important;
+                        line-height: 26px !important;
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 456px) {
+    .help-request-alert {
+        padding: 5px !important;
+    }
+}
+@media screen and (max-width: 320px) {
+    .button-secondary {
+        padding: 5px !important;
+    }
+}

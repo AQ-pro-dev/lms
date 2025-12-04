@@ -1,0 +1,140 @@
+.dashboard {
+    border-left: 2px solid #b2b4b7;
+
+    .course-detail {
+        .course-box {
+            border: 1px solid #cdcfd5;
+            padding: 32px 100px;
+            border-radius: 7px;
+
+            .course-box-icon {
+                padding: 20px;
+                background-color: #e7ece9;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+
+                i {
+                    font-size: 26px;
+                    color: $primary-color;
+                }
+            }
+
+            .number {
+                font-size: 32px;
+                line-height: 50px;
+                font-weight: 700;
+            }
+
+            span {
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 20px;
+                color: #41454f;
+            }
+        }
+    }
+    .tutor-course-info {
+        .course-box {
+            border: 1px solid #cdcfd5;
+            padding: 32px 200px;
+            border-radius: 7px;
+
+            .course-box-icon {
+                padding: 20px;
+                background-color: #e7ece9;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+
+                i {
+                    font-size: 26px;
+                    color: $primary-color;
+                }
+            }
+
+            .number {
+                font-size: 32px;
+                line-height: 50px;
+                font-weight: 700;
+            }
+
+            span {
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 20px;
+                color: #41454f;
+            }
+        }
+    }
+
+    .course-progress {
+        .inner {
+            border: 1px solid #cdcfd5;
+            border-radius: 5px;
+
+            .progress-course-img {
+                img {
+                    max-width: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            .progress-course-detail {
+                .progress-course-rating {
+                    i {
+                        margin-left: 4px;
+                    }
+                }
+
+                h4 {
+                    font-size: 20px;
+                    line-height: 24px;
+                    font-weight: 500;
+                }
+
+                .lessons-complete {
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: 22px;
+                    color: #757c8e;
+
+                    span {
+                        font-size: 14px;
+                        line-height: 22px;
+                        font-weight: 500;
+                        color: #212327;
+                    }
+                }
+            }
+
+            .course-progress-bar {
+                progress {
+                    width: 100%;
+                }
+
+                p {
+                    margin: 0;
+                    font-size: 14px;
+                    line-height: 22px;
+                    font-weight: 500;
+                    color: #757c8e;
+
+                    span {
+                        color: #212327;
+                    }
+                }
+            }
+        }
+    }
+    @media screen and (max-width: 1400px) {
+        .tutor-course-info {
+            .course-box {
+                padding: 32px 110px;
+            }
+        }
+    }
+}
