@@ -18,35 +18,64 @@ class Login extends Component
 
     public $email, $password, $reset_email;
 
+    // public function login()
+    // {
+    //     $validatedData = $this->validate([
+    //         'email' => 'required|email',
+    //         'password' => 'required',
+    //     ]);
+
+    //     $user = User::where('email', $this->email)->first();
+
+    //     if ($user && Hash::check($this->password, $user->password)) {
+    //         if ($user->hasVerifiedEmail()) {
+    //             Auth::login($user);
+
+    //             session([
+    //                 'user_id' => $user->id,
+    //                 // 'role_ids' => $user->roles()->pluck('id')->toArray(),
+    //             ]);
+
+
+    //             return redirect()->route('dashboard.settings');
+    //         } else {
+    //             $this->alert('warning', 'Please verify your email address before logging in.');
+
+    //             return;
+    //         }
+    //     }
+
+    //     $this->alert('warning', 'Invalid email or password. Please try again.');
+    // }
     public function login()
     {
-        $validatedData = $this->validate([
+        $this->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
         $user = User::where('email', $this->email)->first();
-
-        if ($user && Hash::check($this->password, $user->password)) {
-            if ($user->hasVerifiedEmail()) {
-                Auth::login($user);
-
-                session([
-                    'user_id' => $user->id,
-                    // 'role_ids' => $user->roles()->pluck('id')->toArray(),
-                ]);
-
-
-                return redirect()->route('dashboard.settings');
-            } else {
-                $this->alert('warning', 'Please verify your email address before logging in.');
-
-                return;
-            }
+        //dd($this->email, $this->password);
+        if (!$user) {
+            $this->alert('warning', 'Invalid email');
+            return;
         }
 
-        $this->alert('warning', 'Invalid email or password. Please try again.');
+        if (!Hash::check($this->password, $user->password)) {
+            $this->alert('warning', 'Invalid email');
+            return;
+        }
+
+        if (!$user->hasVerifiedEmail()) {
+            $this->alert('warning', 'Please verify your email before logging in.');
+            return;
+        }
+
+        Auth::login($user);
+
+        return redirect()->route('dashboard.settings');
     }
+
 
 
     public function sendPasswordResetLink(Request $request)

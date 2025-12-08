@@ -1,4 +1,6 @@
-.students {
+.students,
+.instructors,
+.admins {
     flex: 1;
 
     .table-wrapper {
@@ -39,6 +41,8 @@
     }
 }
 
-.students table td {
+.students table td,
+.instructors table td,
+.admins table td {
     user-select: none;
 }

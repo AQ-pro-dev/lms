@@ -95,19 +95,25 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{ Route::currentRouteName() == 'dashboard.users.instructors' ? 'active' : '' }}"
-                                        href="" wire:navigate>
+                                    <a class="nav-link {{ Route::currentRouteName() == 'dashboard.instructors' ? 'active' : '' }}"
+                                        href="{{ route('dashboard.instructors') }}" wire:navigate>
                                         <i class="fas fa-chalkboard-teacher"></i> Instructors
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link {{ Route::currentRouteName() == 'dashboard.users.admins' ? 'active' : '' }}"
-                                        href="" wire:navigate>
+                                        href="{{ route('dashboard.users.admins') }}" wire:navigate>
                                         <i class="fa-solid fa-user-tie"></i> Admins
                                     </a>
                                 </li>
                             </ul>
                         </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::currentRouteName() == 'dashboard.system.settings' ? 'active' : '' }}"
+                            href="{{ route('dashboard.system.settings') }}" wire:navigate>
+                            <i class="fas fa-cog"></i> System Settings
+                        </a>
                     </li>
 
                     <li class="nav-item">

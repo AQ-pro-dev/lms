@@ -8,16 +8,16 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Hash;
 
-class Student extends Component
+class Instructor extends Component
 {
     use WithPagination;
 
-    public $studentsWithEnrollments = [];
-    public $selectedStudentId;
-    public $selectedStudentData = [];
-    public $selectedStudentCourses = [];
+    public $instructorsWithCourses = [];
+    public $selectedInstructorId;
+    public $selectedInstructorData = [];
+    public $selectedInstructorCourses = [];
     public $newPassword = '';
-    public $originalStudentData = [];
+    public $originalInstructorData = [];
     public $hasChanges = false;
     
     // Search property
@@ -46,13 +46,13 @@ class Student extends Component
         $this->resetPage();
     }
 
-    protected function getStudentsProperty()
+    protected function getInstructorsProperty()
     {
-        $perPage = (int) Setting::get('pagination_students_per_page', 15);
+        $perPage = (int) Setting::get('pagination_instructors_per_page', 15);
         
         $query = User::withTrashed()
-            ->where('role_id', 3)
-            ->with('bookings.course');
+            ->where('role_id', 2)
+            ->with('courses');
 
         // Apply search filter
         if (!empty($this->search)) {
@@ -101,6 +101,7 @@ class Student extends Component
         } else {
             session()->flash('warning', 'User is already active.');
         }
+
         // Data will reload automatically via render
     }
 
@@ -109,23 +110,11 @@ class Student extends Component
         $user = User::withTrashed()->find($userId);
 
         if ($user) {
-            $oldRoleId = $user->role_id;
             $user->role_id = $newRoleId;
             $user->save();
-            
-            // Determine where the user will appear now
-            $roleNames = [1 => 'Admin', 2 => 'Instructor', 3 => 'Student'];
-            $newRoleName = $roleNames[$newRoleId] ?? 'User';
-            $oldRoleName = $roleNames[$oldRoleId] ?? 'User';
-            
-            if ($newRoleId == 2) {
-                session()->flash('message', "User has been promoted from {$oldRoleName} to {$newRoleName}. They will now appear in the Instructors section.");
-            } elseif ($newRoleId == 1) {
-                session()->flash('message', "User has been promoted from {$oldRoleName} to {$newRoleName}. They will now appear in the Admins section.");
-            } else {
-                session()->flash('message', "User role has been updated from {$oldRoleName} to {$newRoleName}.");
-            }
+            session()->flash('message', 'User role has been updated successfully.');
         }
+
         // Data will reload automatically via render
     }
 
@@ -145,15 +134,16 @@ class Student extends Component
             }
             $user->save();
         }
+
         // Data will reload automatically via render
     }
 
     public function showDetails($userId)
     {
-        $user = User::withTrashed()->with('bookings.course')->findOrFail($userId);
+        $user = User::withTrashed()->with('courses')->findOrFail($userId);
 
-        $this->selectedStudentId = $user->id;
-        $this->selectedStudentData = [
+        $this->selectedInstructorId = $user->id;
+        $this->selectedInstructorData = [
             'first_name' => $user->first_name,
             'last_name' => $user->last_name,
             'username' => $user->username,
@@ -167,21 +157,19 @@ class Student extends Component
             'website' => $user->website,
             'github' => $user->github,
             'microsoft_account' => $user->microsoft_account,
-
         ];
-        // dd($this->selectedStudentData['microsoft_account']);
 
-        $this->selectedStudentCourses = $user->bookings->pluck('course')->filter();
-        $this->originalStudentData = $this->selectedStudentData;
+        $this->selectedInstructorCourses = $user->courses;
+        $this->originalInstructorData = $this->selectedInstructorData;
         $this->newPassword = '';
         $this->hasChanges = false;
     }
 
-    public function updateStudent()
+    public function updateInstructor()
     {
-        $user = User::withTrashed()->findOrFail($this->selectedStudentId);
+        $user = User::withTrashed()->findOrFail($this->selectedInstructorId);
 
-        $user->update($this->selectedStudentData);
+        $user->update($this->selectedInstructorData);
 
         if (!empty($this->newPassword)) {
             $user->password = bcrypt($this->newPassword);
@@ -189,15 +177,15 @@ class Student extends Component
             $this->newPassword = '';
         }
 
-        session()->flash('message', 'Student profile updated successfully.');
+        session()->flash('message', 'Instructor profile updated successfully.');
         $this->hasChanges = false;
-        $this->originalStudentData = $this->selectedStudentData;
-        $this->dispatch('close-modal'); // Close modal after deletion
+        $this->originalInstructorData = $this->selectedInstructorData;
+        $this->dispatch('close-modal');
     }
 
     public function updated($propertyName)
     {
-        $this->hasChanges = $this->selectedStudentData !== $this->originalStudentData || !empty($this->newPassword);
+        $this->hasChanges = $this->selectedInstructorData !== $this->originalInstructorData || !empty($this->newPassword);
     }
 
     public function openCreateModal()
@@ -244,36 +232,36 @@ class Student extends Component
                 'email' => $this->newUser['email'],
                 'phone' => $this->newUser['phone'],
                 'password' => Hash::make($this->newUser['password']),
-                'role_id' => 3, // Student
+                'role_id' => 2, // Instructor
                 'microsoft_account' => false,
                 'timezone' => 'UTC',
                 'email_verified_at' => null, // Initially unverified
             ]);
 
-            session()->flash('message', 'Student created successfully!');
+            session()->flash('message', 'Instructor created successfully!');
             $this->closeCreateModal();
             $this->dispatch('closeCreateModal');
         } catch (\Exception $e) {
-            session()->flash('error', 'Failed to create student: ' . $e->getMessage());
+            session()->flash('error', 'Failed to create instructor: ' . $e->getMessage());
         }
     }
 
     public function render()
     {
-        $studentsPaginated = $this->getStudentsProperty();
+        $instructorsPaginated = $this->getInstructorsProperty();
         
-        $this->studentsWithEnrollments = [];
-        foreach ($studentsPaginated as $student) {
-            $enrolledCourses = $student->bookings->pluck('course')->filter();
-            $this->studentsWithEnrollments[] = [
-                'student' => $student,
-                'courses' => $enrolledCourses,
-                'count' => $enrolledCourses->count(),
+        $this->instructorsWithCourses = [];
+        foreach ($instructorsPaginated as $instructor) {
+            $courses = $instructor->courses;
+            $this->instructorsWithCourses[] = [
+                'instructor' => $instructor,
+                'courses' => $courses,
+                'count' => $courses->count(),
             ];
         }
         
-        return view('livewire.dashboard.student', [
-            'students' => $studentsPaginated,
+        return view('livewire.dashboard.instructor', [
+            'instructors' => $instructorsPaginated,
         ])->layout('components.layouts.dashboard');
     }
 }

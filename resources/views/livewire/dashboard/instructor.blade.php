@@ -1,10 +1,10 @@
-<div class="students py-5 px-4">
+<div class="instructors py-5 px-4">
     <div class="mt-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="text-primary fw-bold mb-0">Students and Enrolled Courses</h4>
+            <h4 class="text-primary fw-bold mb-0">Instructors and Their Courses</h4>
             <button class="btn btn-primary" wire:click="openCreateModal" data-bs-toggle="modal"
-                data-bs-target="#createStudentModal">
-                <i class="bi bi-plus-circle me-2"></i>Add New Student
+                data-bs-target="#createInstructorModal">
+                <i class="bi bi-plus-circle me-2"></i>Add New Instructor
             </button>
         </div>
 
@@ -28,24 +28,6 @@
             </div>
         @endif
 
-        {{-- Help Text - Only show if there are unverified users and only on student page --}}
-        @php
-            $hasUnverifiedUsers = collect($studentsWithEnrollments)->contains(function ($data) {
-                return !$data['student']->hasVerifiedEmail();
-            });
-            $isStudentPage = Route::currentRouteName() == 'dashboard.students';
-        @endphp
-        @if ($hasUnverifiedUsers && $isStudentPage)
-            <div class="alert alert-info mb-3">
-                <small>
-                    <i class="bi bi-info-circle me-1"></i>
-                    <strong>Note:</strong> 
-                    <strong>Email Verification</strong> controls whether a user can log in (email verification status). 
-                    <strong>Account Status</strong> controls whether the account is active or blocked (account access).
-                </small>
-            </div>
-        @endif
-
         {{-- Search Bar --}}
         <div class="mb-3">
             <div class="row">
@@ -65,9 +47,9 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Student Name</th>
+                            <th scope="col">Instructor Name</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Enrolled Courses</th>
+                            <th scope="col">Courses Created</th>
                             <th scope="col">Email Verification</th>
                             <th scope="col">Account Status</th>
                             <th scope="col">Promote</th>
@@ -75,8 +57,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($studentsWithEnrollments as $index => $data)
-                            @php $user = $data['student']; @endphp
+                        @forelse ($instructorsWithCourses as $index => $data)
+                            @php $user = $data['instructor']; @endphp
                             <tr class="{{ $user->trashed() ? 'table-danger' : '' }}">
                                 <td>{{ $index + 1 }}</td>
                                 <td>{{ $user->name }}</td>
@@ -177,11 +159,11 @@
                                             Promote To
                                         </button>
                                         <ul class="dropdown-menu shadow-sm">
-                                            @if ($user->role_id !== 2)
+                                            @if ($user->role_id !== 3)
                                                 <li>
                                                     <a href="#" class="dropdown-item text-primary fw-semibold"
-                                                        wire:click.prevent="promoteUser({{ $user->id }}, 2)">
-                                                        <i class="bi bi-person-gear me-2"></i> Instructor
+                                                        wire:click.prevent="promoteUser({{ $user->id }}, 3)">
+                                                        <i class="bi bi-person me-2"></i> Student
                                                     </a>
                                                 </li>
                                             @endif
@@ -199,7 +181,7 @@
                                 <td>
                                     <button class="btn btn-sm btn-primary" type="button" data-bs-toggle="modal"
                                         data-bs-target="#staticBackdrop" wire:click="showDetails({{ $user->id }})"
-                                        aria-label="View student details">
+                                        aria-label="View instructor details">
                                         Details
                                     </button>
                                 </td>
@@ -207,7 +189,7 @@
                         @empty
                             <tr>
                                 <td colspan="8" class="text-center text-muted py-3">
-                                    <i class="bi bi-emoji-frown me-2"></i> No students found.
+                                    <i class="bi bi-emoji-frown me-2"></i> No instructors found.
                                 </td>
                             </tr>
                         @endforelse
@@ -218,50 +200,50 @@
 
         {{-- Pagination --}}
         <div class="mt-3">
-            {{ $students->links() }}
+            {{ $instructors->links() }}
         </div>
     </div>
-    {{-- student modal --}}
+    {{-- instructor modal --}}
     <div wire:ignore.self class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5 text-white">
-                        <i class="bi bi-person-lines-fill me-2 text-white"></i> Student Details
+                        <i class="bi bi-person-lines-fill me-2 text-white"></i> Instructor Details
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form wire:submit.prevent="updateStudent">
+                    <form wire:submit.prevent="updateInstructor">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label>First Name</label>
                                 <input type="text" class="form-control"
-                                    wire:model.defer="selectedStudentData.first_name">
+                                    wire:model.defer="selectedInstructorData.first_name">
                             </div>
                             <div class="col-md-6">
                                 <label>Last Name</label>
                                 <input type="text" class="form-control"
-                                    wire:model.defer="selectedStudentData.last_name">
+                                    wire:model.defer="selectedInstructorData.last_name">
                             </div>
                             <div class="col-md-6">
                                 <label>Username</label>
                                 <input type="text" class="form-control"
-                                    wire:model.defer="selectedStudentData.username">
+                                    wire:model.defer="selectedInstructorData.username">
                             </div>
                             <div class="col-md-6">
                                 <label>Email</label>
-                                <input type="email" class="form-control" wire:model.defer="selectedStudentData.email">
+                                <input type="email" class="form-control" wire:model.defer="selectedInstructorData.email">
                             </div>
                             <div class="col-md-6">
                                 <label>Phone</label>
-                                <input type="text" class="form-control" wire:model.defer="selectedStudentData.phone">
+                                <input type="text" class="form-control" wire:model.defer="selectedInstructorData.phone">
                             </div>
                             <div class="col-md-6">
                                 <label>Timezone</label>
                                 <input type="text" class="form-control"
-                                    wire:model.defer="selectedStudentData.timezone">
+                                    wire:model.defer="selectedInstructorData.timezone">
                             </div>
                             <div class="col-md-6">
                                 <label>New Password <small class="text-muted">(leave blank to keep
@@ -270,17 +252,16 @@
                             </div>
                             <div class="col-12">
                                 <label>Bio</label>
-                                <textarea class="form-control" rows="2" wire:model.defer="selectedStudentData.bio"></textarea>
+                                <textarea class="form-control" rows="2" wire:model.defer="selectedInstructorData.bio"></textarea>
                             </div>
                             <div class="col-md-6">
                                 <label>Microsoft Account</label><br>
-                                @if (data_get($selectedStudentData, 'microsoft_account'))
+                                @if (data_get($selectedInstructorData, 'microsoft_account'))
                                     <span class="badge bg-success">Connected</span>
                                 @else
                                     <span class="badge bg-secondary">Not Connected</span>
                                 @endif
                             </div>
-
 
                             <div class="col-12">
                                 <h6 class="mt-3 text-primary fw-bold">Social Links</h6>
@@ -288,35 +269,35 @@
                             <div class="col-md-6">
                                 <label>Facebook</label>
                                 <input type="text" class="form-control"
-                                    wire:model.defer="selectedStudentData.facebook">
+                                    wire:model.defer="selectedInstructorData.facebook">
                             </div>
                             <div class="col-md-6">
                                 <label>Twitter</label>
                                 <input type="text" class="form-control"
-                                    wire:model.defer="selectedStudentData.twitter">
+                                    wire:model.defer="selectedInstructorData.twitter">
                             </div>
                             <div class="col-md-6">
                                 <label>LinkedIn</label>
                                 <input type="text" class="form-control"
-                                    wire:model.defer="selectedStudentData.linkedin">
+                                    wire:model.defer="selectedInstructorData.linkedin">
                             </div>
                             <div class="col-md-6">
                                 <label>Website</label>
                                 <input type="text" class="form-control"
-                                    wire:model.defer="selectedStudentData.website">
+                                    wire:model.defer="selectedInstructorData.website">
                             </div>
                             <div class="col-md-6">
                                 <label>GitHub</label>
                                 <input type="text" class="form-control"
-                                    wire:model.defer="selectedStudentData.github">
+                                    wire:model.defer="selectedInstructorData.github">
                             </div>
                             <div class="col-12 mt-4">
-                                <h6 class="text-primary fw-bold">Enrolled Courses</h6>
+                                <h6 class="text-primary fw-bold">Created Courses</h6>
                                 <ul class="list-group">
-                                    @forelse($selectedStudentCourses as $course)
+                                    @forelse($selectedInstructorCourses as $course)
                                         <li class="list-group-item">{{ $course->title }}</li>
                                     @empty
-                                        <li class="list-group-item text-muted">No enrolled courses.</li>
+                                        <li class="list-group-item text-muted">No courses created.</li>
                                     @endforelse
                                 </ul>
                             </div>
@@ -331,14 +312,14 @@
         </div>
     </div>
 
-    {{-- Create New Student Modal --}}
-    <div wire:ignore.self class="modal fade" id="createStudentModal" data-bs-backdrop="static" data-bs-keyboard="false"
-        tabindex="-1" aria-labelledby="createStudentModalLabel" aria-hidden="true">
+    {{-- Create New Instructor Modal --}}
+    <div wire:ignore.self class="modal fade" id="createInstructorModal" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="createInstructorModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5 text-white">
-                        <i class="bi bi-person-plus me-2 text-white"></i> Add New Student
+                        <i class="bi bi-person-plus me-2 text-white"></i> Add New Instructor
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                         wire:click="closeCreateModal"></button>
@@ -396,7 +377,7 @@
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                                 wire:click="closeCreateModal">Close</button>
                             <button type="submit" class="btn btn-primary">
-                                <span wire:loading.remove wire:target="createUser">Create Student</span>
+                                <span wire:loading.remove wire:target="createUser">Create Instructor</span>
                                 <span wire:loading wire:target="createUser">
                                     <span class="spinner-border spinner-border-sm me-2"></span>Creating...
                                 </span>
@@ -412,11 +393,11 @@
     <script>
         window.addEventListener('close-modal', event => {
             $('#staticBackdrop').modal('hide');
-            $('#createStudentModal').modal('hide');
+            $('#createInstructorModal').modal('hide');
         });
         
         Livewire.on('closeCreateModal', () => {
-            $('#createStudentModal').modal('hide');
+            $('#createInstructorModal').modal('hide');
         });
     </script>
 @endpush
