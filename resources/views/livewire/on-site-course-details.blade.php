@@ -25,15 +25,22 @@
                         @else
                             <span class="onsite-price">{{ $price }}$</span>
                         @endif
-                        @if ($isEnrolled)
-                            <!-- Show 'Enrolled' Button -->
-                            <button type="button" class="btn btn-success">Enrolled</button>
+                        @if (Auth::check())
+                            @if ($isEnrolled)
+                                <!-- Show 'Enrolled' Button -->
+                                <button type="button" class="btn btn-success">Enrolled</button>
+                            @else
+                                <!-- Show 'Enroll NOW' Button -->
+                                <button type="button" class="onsite-add-to-cart button-primary" data-bs-toggle="modal"
+                                    data-bs-target="#courseEnrollment">
+                                    Enroll NOW
+                                </button>
+                            @endif
                         @else
-                            <!-- Show 'Enroll NOW' Button -->
-                            <button type="button" class="onsite-add-to-cart button-primary" data-bs-toggle="modal"
-                                data-bs-target="#courseEnrollment">
-                                Enroll NOW
-                            </button>
+                            <!-- Show 'Login to Enroll' Button for guests -->
+                            <a href="{{ route('login') }}" class="onsite-add-to-cart button-primary">
+                                Login to Enroll
+                            </a>
                         @endif
                     </div>
                     <div class="onsite-enrollment">

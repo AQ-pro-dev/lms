@@ -43,9 +43,7 @@ use App\Models\Lecture;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckRole;
 use App\Livewire\Dashboard\Emails;
-use App\Livewire\Dashboard\Student;
-use App\Livewire\Dashboard\Instructor;
-use App\Livewire\Dashboard\Admin;
+use App\Livewire\Dashboard\UserManagement;
 use App\Livewire\Dashboard\SystemSettings;
 use App\Livewire\Dashboard\StudentView;
 use App\Livewire\RecordedLecture;
@@ -97,9 +95,7 @@ Route::middleware('auth')->group(
         Route::get('/dashboard/wishlist', DashboardWishlist::class)->name('dashboard.wishlist');
         Route::get('/dashboard/enrolled-courses', DashboardEnrolledCourses::class)->name('dashboard.enrolledCourses');
         Route::get('/dashboard/settings', DashboardSettings::class)->name('dashboard.settings');
-        Route::get('/dashboard/students', Student::class)->name('dashboard.students');
-        Route::get('/dashboard/instructors', Instructor::class)->name('dashboard.instructors');
-        Route::get('/dashboard/admins', Admin::class)->name('dashboard.users.admins');
+        Route::get('/dashboard/users', UserManagement::class)->name('dashboard.users');
         Route::get('/dashboard/system-settings', SystemSettings::class)->name('dashboard.system.settings');
     }
 );

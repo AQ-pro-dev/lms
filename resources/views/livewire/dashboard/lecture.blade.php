@@ -12,6 +12,16 @@
                     <option value="{{ $course->id }}">{{ $course->title }}</option>
                 @endforeach
             </select>
+            @if (count($courses) == 0)
+                <div class="alert alert-warning mt-2">
+                    <strong>No courses found!</strong> 
+                    @if (Auth::user()->role_id == 2)
+                        You don't have any recorded courses yet. Please create a recorded course first before uploading lectures.
+                    @else
+                        No recorded courses are available at the moment.
+                    @endif
+                </div>
+            @endif
             <div wire:loading wire:target="course_id" class="text-info mt-2">Loading lectures...</div>
             @error('course_id')
                 <span class="text-danger">{{ $message }}</span>

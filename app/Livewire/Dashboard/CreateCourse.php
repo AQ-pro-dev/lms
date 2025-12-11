@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Tag;
 use App\Models\Tutor;
 use App\Models\Course;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -48,7 +49,9 @@ class CreateCourse extends Component
             'category.*' => 'exists:categories,id',
             'tags' => 'required|array|min:1',
             'tags.*' => 'exists:tags,id',
-            'file' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:1024',
+            'file' => ($this->file instanceof \Illuminate\Http\UploadedFile)
+                ? 'nullable|image|mimes:jpeg,jpg,png,webp|max:1024'
+                : 'nullable|string',
             'videoFile' => ($this->videoFile instanceof \Illuminate\Http\UploadedFile)
                 ? 'nullable|file|mimes:mp4,mov,avi|max:10240'
                 : 'nullable|string',
@@ -61,13 +64,21 @@ class CreateCourse extends Component
         ];
     }
 
+    protected function messages()
+    {
+        return [
+            'file.image' => 'The course thumbnail must be an image file.',
+            'file.mimes' => 'The course thumbnail must be a file of type: jpeg, jpg, png, or webp.',
+            'file.max' => 'The course thumbnail must not be larger than 1MB.',
+        ];
+    }
+
     public function uploadVideo()
     {
         if ($this->videoFile instanceof \Illuminate\Http\UploadedFile) {
             return $this->videoFile->store('videos', 'public');
-
         }
-        return null;
+        return ''; // Return empty string to avoid null constraint violation
     }
 
     public function uploadThumbnail()
@@ -83,7 +94,25 @@ class CreateCourse extends Component
     {
         $this->tagslist = Tag::all();
         $this->categorylist = Category::all();
-        $this->tutorList = Tutor::with('user')->get();
+        
+        // Get instructors from users table (role_id = 2) and ensure they have Tutor records
+        $instructorUsers = User::where('role_id', 2)->get();
+        $tutorList = [];
+        
+        foreach ($instructorUsers as $user) {
+            // Get or create Tutor record for this instructor
+            $tutor = Tutor::firstOrCreate(
+                ['user_id' => $user->id],
+                [
+                    'specialization' => $user->bio ?? 'General',
+                    'preferred_teaching_method' => 'online',
+                    'is_verified' => true
+                ]
+            );
+            $tutorList[] = $tutor;
+        }
+        
+        $this->tutorList = collect($tutorList);
 
         if ($courseId) {
             $this->courseId = $courseId;
@@ -92,7 +121,7 @@ class CreateCourse extends Component
 
         $authTutor = Tutor::where('user_id', Auth::id())->first();
         if ($authTutor) {
-            $this->tutors = [$authTutor->id];
+            $this->tutors = [$authTutor->user_id];
             $this->selectedTutors = [$authTutor];
         }
     }
@@ -106,7 +135,8 @@ class CreateCourse extends Component
         $this->category = $course->categories->pluck('id')->toArray();
         $this->tags = $course->tags->pluck('id')->toArray();
         $this->tutors = $course->tutors->pluck('user_id')->toArray();
-        $this->file = $course->thumbnail;
+        $this->selectedTutors = $course->tutors;
+        $this->file = null; // Don't set file to existing thumbnail - only set when new file is uploaded
         $this->learnDetails = $course->learning_outcomes;
         $this->audienceDetails = $course->target_audience;
         $this->requirements = $course->requirements;
@@ -122,12 +152,13 @@ class CreateCourse extends Component
     {
         $authTutor = Tutor::where('user_id', Auth::id())->first();
 
-        if ($authTutor && !in_array($authTutor->id, $this->tutors)) {
-            $this->tutors[] = $authTutor->id;
+        if ($authTutor && !in_array($authTutor->user_id, $this->tutors)) {
+            $this->tutors[] = $authTutor->user_id;
         }
 
+        // Get tutors by user_id (since tutors array contains user_ids)
         $this->selectedTutors = Tutor::with('user')
-            ->whereIn('id', array_unique($this->tutors))
+            ->whereIn('user_id', array_unique($this->tutors))
             ->get();
     }
 
@@ -143,27 +174,49 @@ class CreateCourse extends Component
 
     public function createCourse()
     {
-        $this->validate();
+        try {
+            $this->validate();
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            $this->alert('error', 'Please fix the validation errors before submitting.');
+            return;
+        }
 
         $filePath = $this->uploadThumbnail();
-        $videoPath = $this->uploadVideo();
+        $videoPath = $this->uploadVideo(); // Can be null now
 
         $role = Auth::user()->role_id;
 
-        // dd($this->tutors);
+        // Determine owner: if admin creating and an instructor is selected, assign to that instructor
+        $ownerId = Auth::id();
+        if ($role == 1 && !empty($this->tutors)) {
+            $primaryInstructorId = $this->tutors[0];
+            if (User::find($primaryInstructorId)) {
+                $ownerId = $primaryInstructorId;
+            }
+        }
+
+        // Normalize is_paid value to match enum ('free' or 'paid')
+        $isPaid = null;
+        if ($this->is_paid) {
+            $isPaid = strtolower($this->is_paid) === 'paid' ? 'paid' : 'free';
+        }
+
+        // For admin-created courses, keep unpublished so they appear in CoursesRequest
+        $isPublished = ($role == 1) ? false : false;
+
         $course = Course::create([
-            'user_id' => Auth::id(),
+            'user_id' => $ownerId,
             'title' => $this->courseTitle,
             'description' => $this->description,
             'thumbnail' => $filePath,
-            'video_path' => $videoPath,
+            'video_path' => $videoPath ?: '', // Use empty string if null to avoid constraint violation
             'learning_outcomes' => $this->learnDetails,
             'requirements' => $this->requirements,
             'target_audience' => $this->audienceDetails,
             'is_drafted' => false,
-            'is_published' => ($role == 1) ? true : false,
-            'is_paid' => $this->is_paid,
-            'price' => $this->price,
+            'is_published' => $isPublished,
+            'is_paid' => $isPaid,
+            'price' => $this->price ?: null,
             'course_type' => $this->courseType,
             'is_completed' => $this->courseType === 'recorded' ? false : true,
         ]);
@@ -171,7 +224,31 @@ class CreateCourse extends Component
 
         $course->categories()->attach($this->category);
         $course->tags()->attach($this->tags);
-        $course->tutors()->attach($this->tutors);
+        // Attach tutors - ensure tutor records exist and users exist
+        if (!empty($this->tutors)) {
+            $tutorIds = [];
+            foreach ($this->tutors as $userId) {
+                // Verify user exists
+                $user = User::find($userId);
+                if (!$user) {
+                    continue; // Skip if user doesn't exist
+                }
+                
+                // Ensure tutor record exists for this user
+                $tutor = Tutor::firstOrCreate(
+                    ['user_id' => $userId],
+                    [
+                        'specialization' => 'General',
+                        'preferred_teaching_method' => 'online',
+                        'is_verified' => true
+                    ]
+                );
+                $tutorIds[] = $tutor->id;
+            }
+            if (!empty($tutorIds)) {
+                $course->tutors()->attach($tutorIds);
+            }
+        }
 
 
         $this->resetForm();
@@ -191,17 +268,57 @@ class CreateCourse extends Component
 
         $videoPath = $this->videoFile instanceof \Illuminate\Http\UploadedFile
             ? $this->uploadVideo()
-            : $this->videoFile;
+            : ($this->existingVideo ?: '');
+
+        // Normalize is_paid value to match enum ('free' or 'paid')
+        $isPaid = null;
+        if ($this->is_paid) {
+            $isPaid = strtolower($this->is_paid) === 'paid' ? 'paid' : 'free';
+        }
+
+        $course->update([
+            'title' => $this->courseTitle,
+            'description' => $this->description,
+            'thumbnail' => $filePath,
+            'video_path' => $videoPath ?: '', // Use empty string if null to avoid constraint violation
+            'learning_outcomes' => $this->learnDetails,
+            'requirements' => $this->requirements,
+            'target_audience' => $this->audienceDetails,
+            'is_paid' => $isPaid,
+            'price' => $this->price ?: null,
+            'course_type' => $this->courseType,
+            'is_completed' => $this->courseType === 'recorded' ? false : true,
+        ]);
 
         $course->categories()->sync($this->category);
         $course->tags()->sync($this->tags);
-        $course->tutors()->sync($this->tutors);
+        // Sync tutors - ensure tutor records exist and users exist
+        if (!empty($this->tutors)) {
+            $tutorIds = [];
+            foreach ($this->tutors as $userId) {
+                // Verify user exists
+                $user = User::find($userId);
+                if (!$user) {
+                    continue; // Skip if user doesn't exist
+                }
+                
+                // Ensure tutor record exists for this user
+                $tutor = Tutor::firstOrCreate(
+                    ['user_id' => $userId],
+                    [
+                        'specialization' => 'General',
+                        'preferred_teaching_method' => 'online',
+                        'is_verified' => true
+                    ]
+                );
+                $tutorIds[] = $tutor->id;
+            }
+            if (!empty($tutorIds)) {
+                $course->tutors()->sync($tutorIds);
+            }
+        }
 
         $this->videoFile = $videoPath;
-
-        $course->categories()->sync($this->category);
-        $course->tags()->sync($this->tags);
-        $course->tutors()->sync($this->tutors);
     }
 
     public function saveAsDraft()
@@ -209,30 +326,69 @@ class CreateCourse extends Component
         $this->validate();
 
         $filePath = $this->uploadThumbnail();
-        $videoPath = $this->uploadVideo();
+        $videoPath = $this->uploadVideo(); // Can be null now
 
         $role = Auth::user()->role_id;
 
+        // Determine owner: if admin creating and an instructor is selected, assign to that instructor
+        $ownerId = Auth::id();
+        if ($role == 1 && !empty($this->tutors)) {
+            $primaryInstructorId = $this->tutors[0];
+            if (User::find($primaryInstructorId)) {
+                $ownerId = $primaryInstructorId;
+            }
+        }
+
+        // Normalize is_paid value to match enum ('free' or 'paid')
+        $isPaid = null;
+        if ($this->is_paid) {
+            $isPaid = strtolower($this->is_paid) === 'paid' ? 'paid' : 'free';
+        }
+
         $course = Course::create([
-            'user_id' => Auth::id(),
+            'user_id' => $ownerId,
             'title' => $this->courseTitle,
             'description' => $this->description,
             'thumbnail' => $filePath,
-            'video_path' => $this->videoFile ? $videoPath : null,
+            'video_path' => $videoPath ?: '', // Use empty string if null to avoid constraint violation
             'learning_outcomes' => $this->learnDetails,
             'requirements' => $this->requirements,
             'target_audience' => $this->audienceDetails,
             'is_drafted' => true,
             'is_published' => ($role == 1) ? true : false,
-            'is_paid' => $this->is_paid,
-            'price' => $this->price,
+            'is_paid' => $isPaid,
+            'price' => $this->price ?: null,
             'course_type' => $this->courseType,
             'is_completed' => $this->courseType === 'recorded' ? false : true,
         ]);
 
         $course->categories()->attach($this->category);
         $course->tags()->attach($this->tags);
-        $course->tutors()->attach($this->tutors);
+        // Attach tutors - ensure tutor records exist and users exist
+        if (!empty($this->tutors)) {
+            $tutorIds = [];
+            foreach ($this->tutors as $userId) {
+                // Verify user exists
+                $user = User::find($userId);
+                if (!$user) {
+                    continue; // Skip if user doesn't exist
+                }
+                
+                // Ensure tutor record exists for this user
+                $tutor = Tutor::firstOrCreate(
+                    ['user_id' => $userId],
+                    [
+                        'specialization' => 'General',
+                        'preferred_teaching_method' => 'online',
+                        'is_verified' => true
+                    ]
+                );
+                $tutorIds[] = $tutor->id;
+            }
+            if (!empty($tutorIds)) {
+                $course->tutors()->attach($tutorIds);
+            }
+        }
 
         $this->resetForm();
         $this->alert('success', 'Course saved as draft.');

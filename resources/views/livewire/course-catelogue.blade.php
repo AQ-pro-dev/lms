@@ -179,8 +179,15 @@
                                                     {{ $item->created_at->diffForHumans() }}</span>
                                             </div>
                                         </div>
-                                        <a class="button-primary mt-3 d-block w-100 text-center" href="#">More
-                                            Details...</a>
+                                        @if ($item->course_type == 'recorded')
+                                            <a class="button-primary mt-3 d-block w-100 text-center" 
+                                                href="{{ route('onsite.course.details', $item->id) }}">More
+                                                Details...</a>
+                                        @else
+                                            <a class="button-primary mt-3 d-block w-100 text-center" 
+                                                href="{{ route('course.details', $item->id) }}">More
+                                                Details...</a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

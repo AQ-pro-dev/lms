@@ -125,6 +125,11 @@ class CourseDetails extends Component
 
     public function enroll($classId, $isPaid, $price)
     {
+        if (!Auth::check()) {
+            session()->flash('error', 'Please login to enroll in classes.');
+            return redirect()->route('login');
+        }
+        
         $this->selectedClassId = $classId;
         $this->isPaid = $isPaid;
         $this->price = $price;

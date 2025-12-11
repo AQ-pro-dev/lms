@@ -80,34 +80,10 @@
                         Admin
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('dashboard/users*') ? 'active' : '' }}"
-                            data-bs-toggle="collapse" href="#usersSubMenu" role="button" aria-expanded="false"
-                            aria-controls="usersSubMenu">
+                        <a class="nav-link {{ Route::currentRouteName() == 'dashboard.users' ? 'active' : '' }}"
+                            href="{{ route('dashboard.users') }}" wire:navigate>
                             <i class="fas fa-users"></i> Users
-                            <i class="fas fa-caret-down float-end"></i>
                         </a>
-                        <div class="collapse {{ Request::is('dashboard/users*') ? 'show' : '' }}" id="usersSubMenu">
-                            <ul class="nav flex-column ms-3">
-                                <li class="nav-item">
-                                    <a class="nav-link {{ Route::currentRouteName() == 'dashboard.users.students' ? 'active' : '' }}"
-                                        href="{{ route('dashboard.students') }}" wire:navigate>
-                                        <i class="fas fa-user-graduate"></i> Students
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link {{ Route::currentRouteName() == 'dashboard.instructors' ? 'active' : '' }}"
-                                        href="{{ route('dashboard.instructors') }}" wire:navigate>
-                                        <i class="fas fa-chalkboard-teacher"></i> Instructors
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link {{ Route::currentRouteName() == 'dashboard.users.admins' ? 'active' : '' }}"
-                                        href="{{ route('dashboard.users.admins') }}" wire:navigate>
-                                        <i class="fa-solid fa-user-tie"></i> Admins
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ Route::currentRouteName() == 'dashboard.system.settings' ? 'active' : '' }}"

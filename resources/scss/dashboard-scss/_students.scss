@@ -1,30 +1,73 @@
 .students,
 .instructors,
-.admins {
+.admins,
+.users {
     flex: 1;
+    min-width: 0; // Allow flex item to shrink below content size
+    overflow: hidden; // Prevent overflow from child elements
 
     .table-wrapper {
         border: 1px solid #cdcfd5;
         border-radius: 7px;
+        max-width: 100%;
+        overflow: hidden;
 
         table {
             margin-bottom: 0 !important;
+            width: 100%;
+            min-width: 800px; // Minimum width to prevent too much compression
 
             thead {
                 th {
                     background-color: #f1f1f1;
                     font-weight: 700;
                     color: #333;
-                    padding: 12px;
+                    padding: 10px 8px;
+                    
+                    // Column width constraints
+                    &:nth-child(1) { width: 40px; } // #
+                    &:nth-child(2) { width: 15%; min-width: 120px; } // Name
+                    &:nth-child(3) { width: 20%; min-width: 150px; } // Email
+                    &:nth-child(4) { width: 80px; } // Role
+                    &:nth-child(5) { width: 140px; } // Email Verification
+                    &:nth-child(6) { width: 130px; } // Account Status
+                    &:nth-child(7) { width: 120px; } // Change Role
+                    &:nth-child(8) { width: 80px; } // Details
+                    
+                    &.user-select-none {
+                        transition: background-color 0.2s ease;
+                        
+                        &:hover {
+                            background-color: #e0e0e0;
+                        }
+                        
+                        i {
+                            transition: color 0.2s ease;
+                        }
+                    }
                 }
             }
 
             tbody {
                 tr {
                     td {
-                        padding: 16px;
-                        vertical-align: top;
+                        padding: 10px 8px;
+                        vertical-align: middle;
                         border-bottom: 1px solid #cdcfd5;
+                        
+                        // Allow email to wrap, keep others compact
+                        &:nth-child(3) {
+                            word-break: break-word;
+                            white-space: normal;
+                        }
+                        
+                        // Keep action columns compact
+                        &:nth-child(5),
+                        &:nth-child(6),
+                        &:nth-child(7),
+                        &:nth-child(8) {
+                            white-space: nowrap;
+                        }
                     }
                 }
             }
@@ -32,7 +75,28 @@
     }
 
     .table-responsive {
-        overflow: visible !important;
+        overflow-x: auto;
+        overflow-y: visible;
+        -webkit-overflow-scrolling: touch;
+        
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        &::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        &::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        
+        &::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+            
+            &:hover {
+                background: #555;
+            }
+        }
     }
 
     .dropdown-menu {
@@ -43,6 +107,7 @@
 
 .students table td,
 .instructors table td,
-.admins table td {
+.admins table td,
+.users table td {
     user-select: none;
 }

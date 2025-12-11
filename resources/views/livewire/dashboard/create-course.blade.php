@@ -147,8 +147,18 @@
                                             <div class="col-md-4">
                                                 <label class="form-label"><strong>Course Thumbnail</strong></label>
                                                 <div class="image-placeholder mb-3">
-                                                    <!-- Display the uploaded image or fallback to a placeholder -->
-                                                    <img src="{{ $file && method_exists($file, 'temporaryUrl') ? $file->temporaryUrl() : ($file ? asset('storage/' . $file) : asset('assets/images/dummy-course-img.webp')) }}"
+                                                    <!-- Display the uploaded image, existing thumbnail, or fallback to a placeholder -->
+                                                    @php
+                                                        $thumbnailUrl = asset('assets/images/dummy-course-img.webp');
+                                                        if ($file && method_exists($file, 'temporaryUrl')) {
+                                                            $thumbnailUrl = $file->temporaryUrl();
+                                                        } elseif ($file && is_string($file)) {
+                                                            $thumbnailUrl = asset('storage/' . $file);
+                                                        } elseif (isset($existingThumbnail) && $existingThumbnail) {
+                                                            $thumbnailUrl = asset('storage/' . $existingThumbnail);
+                                                        }
+                                                    @endphp
+                                                    <img src="{{ $thumbnailUrl }}"
                                                         style="width: 250px; height: 150px; object-fit: cover;"
                                                         alt="Course Thumbnail" id="previewImage">
 
@@ -273,7 +283,7 @@
                                                         wire:model="tutors" required>
                                                         @foreach ($tutorList as $tutor)
                                                             <option value="{{ $tutor->user->id }}">
-                                                                {{ $tutor->user->email }}
+                                                                {{ $tutor->user->name }} ({{ $tutor->user->email }})
                                                             </option>
                                                         @endforeach
                                                     </select>

@@ -19,7 +19,6 @@
         </div>
     </div>
 </div>
-@script
 @push('js')
 <script>
 $(document).ready(function() {
@@ -29,4 +28,3 @@ $(document).ready(function() {
 })
 </script>
 @endpush
-@endscript

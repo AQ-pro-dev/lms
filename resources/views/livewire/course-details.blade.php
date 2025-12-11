@@ -1,5 +1,5 @@
 <div class="course-details">
-    <section class="hero" style="background-image: url('{{ asset('storage/' . $coursePhoto) }}');">
+    <section class="hero" style="background-image: url('{{ $coursePhoto ? asset('storage/' . $coursePhoto) : asset('assets/images/dummy-cover-photo.webp') }}');">
         <div class="container">
             <div class="inner">
                 <div class="hero-details">
@@ -140,11 +140,16 @@
     </div>
     <section class="course-video">
         <div class="container">
-            <div class="video">
-                <iframe src="{{ asset('storage/' . $courseVideo) }}" frameborder="0" allowfullscreen></iframe>
-
-                {{-- <video controls src="{{ asset('storage/' . $courseVideo) }}"></video> --}}
-            </div>
+            @if ($courseVideo)
+                <div class="video">
+                    <iframe src="{{ asset('storage/' . $courseVideo) }}" frameborder="0" allowfullscreen></iframe>
+                    {{-- <video controls src="{{ asset('storage/' . $courseVideo) }}"></video> --}}
+                </div>
+            @else
+                <div class="alert alert-info text-center">
+                    <p>No course video available.</p>
+                </div>
+            @endif
             <div class="course-details-tabs mt-5">
                 <!-- Tab Navigation -->
                 <ul class="nav nav-tabs" id="myTab" role="tablist">

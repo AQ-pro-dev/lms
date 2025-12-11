@@ -59,6 +59,11 @@ class OnSiteCourseDetails extends Component
 
     public function enrollCourse()
     {
+        if (!Auth::check()) {
+            session()->flash('error', 'Please login to enroll in courses.');
+            return redirect()->route('login');
+        }
+        
         if ($this->isPaid) {
             $this->redirectToStripeCheckout();
         } else {
@@ -116,9 +121,13 @@ class OnSiteCourseDetails extends Component
     }
     public function checkEnrollment()
     {
-        $this->isEnrolled = Booking::where('user_id', Auth::id())
-            ->where('course_id', $this->courseId)
-            ->exists();
+        if (Auth::check()) {
+            $this->isEnrolled = Booking::where('user_id', Auth::id())
+                ->where('course_id', $this->courseId)
+                ->exists();
+        } else {
+            $this->isEnrolled = false;
+        }
     }
 
 
