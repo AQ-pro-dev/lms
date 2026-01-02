@@ -198,13 +198,13 @@
                                 <button
                                     class="accordion-button {{ $errors->has('videoFile') || $videoFile ? '' : 'collapsed' }}"
                                     type="button" data-bs-toggle="collapse" data-bs-target="#collapseVideo"
-                                    aria-expanded="{{ $errors->has('videoFile') || $videoFile ? 'true' : 'false' }}"
+                                    aria-expanded="{{ $errors->has('videoFile') || $videoFile || $existingVideo ? 'true' : 'false' }}"
                                     aria-controls="collapseVideo">
                                     Video
                                 </button>
                             </h2>
                             <div id="collapseVideo"
-                                class="accordion-collapse collapse {{ $errors->has('videoFile') || $videoFile ? 'show' : '' }}"
+                                class="accordion-collapse collapse {{ $errors->has('videoFile') || $videoFile || $existingVideo ? 'show' : '' }}"
                                 aria-labelledby="headingVideo">
                                 <div class="accordion-body">
                                     <div class="row align-items-center">
@@ -232,10 +232,10 @@
 
                                         <!-- Video Preview -->
                                         <div class="col-md-6 text-center">
-                                            @if ($videoFile)
+                                            @if ($videoFile || $existingVideo)
                                                 <div class="mt-3">
                                                     <label class="form-label">Video Preview:</label>
-                                                    @if (method_exists($videoFile, 'temporaryUrl'))
+                                                    @if ($videoFile && method_exists($videoFile, 'temporaryUrl'))
                                                         <!-- Display video using temporaryUrl() for newly uploaded file -->
                                                         <video controls class="w-100 rounded border"
                                                             style="max-height: 250px;"
@@ -244,8 +244,27 @@
                                                                 type="video/mp4">
                                                             Your browser does not support the video tag.
                                                         </video>
-                                                    @else
-                                                        <!-- Display existing video file from storage or database -->
+                                                    @elseif ($existingVideo)
+                                                        <!-- Display existing video file from storage -->
+                                                        @php
+                                                            $videoExists = \Storage::disk('public')->exists($existingVideo);
+                                                        @endphp
+                                                        @if ($videoExists)
+                                                            <video controls class="w-100 rounded border"
+                                                                style="max-height: 250px;">
+                                                                <source src="{{ asset('storage/' . $existingVideo) }}"
+                                                                    type="video/mp4">
+                                                                Your browser does not support the video tag.
+                                                            </video>
+                                                            <p class="text-muted small mt-2">Current video: {{ basename($existingVideo) }}</p>
+                                                        @else
+                                                            <div class="alert alert-warning">
+                                                                <p class="mb-0">Video file not found: {{ $existingVideo }}</p>
+                                                                <p class="mb-0 small">Please upload a new video file.</p>
+                                                            </div>
+                                                        @endif
+                                                    @elseif ($videoFile)
+                                                        <!-- Fallback for string path -->
                                                         <video controls class="w-100 rounded border"
                                                             style="max-height: 250px;">
                                                             <source src="{{ asset('storage/' . $videoFile) }}"

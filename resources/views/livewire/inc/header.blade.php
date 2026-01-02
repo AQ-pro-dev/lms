@@ -11,14 +11,14 @@
                 <i class="fa-solid fa-bars-staggered fa-xl"></i>
             </div>
             <div class="user-login">
-                @if (Auth::check())
+                @if (Auth::check() && Auth::user())
                     <div class="login-icon">
                         <img class="login-icon-img"
                             src="{{ Auth::user()->pfp ? asset('storage/' . Auth::user()->pfp) : asset('assets/images/dummy-profile-photo.webp') }}"
                             alt="">
                     </div>
                     <div class="user-dropdown">
-                        <span class="fs-5 mb-3 d-block">{{ Auth::user()->first_name }}</span>
+                        <span class="fs-5 mb-3 d-block">{{ Auth::user()->name ?? Auth::user()->first_name ?? Auth::user()->username ?? 'User' }}</span>
                         <ul>
                             <li>
                                 <a href="{{ route('dashboard') }}" wire:navigate>
@@ -108,14 +108,14 @@
         </nav>
         <div class="nav-btn d-flex align-items-center gap-2 mx-2">
             <div class="user-login">
-                @if (Auth::check())
+                @if (Auth::check() && Auth::user())
                     <div class="login-icon">
                         <img class="login-icon-img"
                             src="{{ Auth::user()->pfp ? asset('storage/' . Auth::user()->pfp) : asset('assets/images/dummy-profile-photo.webp') }}"
                             alt="">
                     </div>
                     <div class="user-dropdown">
-                        <span class="fs-5 mb-3 d-block">{{ Auth::user()->first_name }}</span>
+                        <span class="fs-5 mb-3 d-block">{{ Auth::user()->name ?? Auth::user()->first_name ?? Auth::user()->username ?? 'User' }}</span>
                         <ul>
                             <li>
                                 <a href="{{ route('dashboard') }}" wire:navigate>

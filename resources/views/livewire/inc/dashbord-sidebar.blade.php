@@ -26,7 +26,7 @@
                         <i class="fas fa-heart"></i> Wishlist
                     </a>
                 </li>
-                @if (Auth::user()->role_id == 2 || Auth::user()->role_id == 3)
+                @if (Auth::check() && (Auth::user()->role_id == 2 || Auth::user()->role_id == 3))
                     <li class="nav-item">
                         <a class="nav-link {{ Route::currentRouteName() == 'dashboard.help' ? 'active' : '' }}"
                             href="{{ route('dashboard.help') }}" wire:navigate>
@@ -75,7 +75,7 @@
                         </a>
                     </li>
                 @endif
-                @if (Auth::user()->role_id == 1)
+                @if (Auth::check() && Auth::user()->role_id == 1)
                     <li class="tutor-dashboard-menu-divider-header">
                         Admin
                     </li>

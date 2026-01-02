@@ -8,6 +8,8 @@ use App\Models\Tutor;
 use App\Models\Course;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -76,7 +78,13 @@ class CreateCourse extends Component
     public function uploadVideo()
     {
         if ($this->videoFile instanceof \Illuminate\Http\UploadedFile) {
-            return $this->videoFile->store('videos', 'public');
+            $path = $this->videoFile->store('videos', 'public');
+            \Log::info('Course video uploaded', [
+                'path' => $path,
+                'size' => $this->videoFile->getSize(),
+                'mime' => $this->videoFile->getMimeType()
+            ]);
+            return $path;
         }
         return ''; // Return empty string to avoid null constraint violation
     }
@@ -137,6 +145,7 @@ class CreateCourse extends Component
         $this->tutors = $course->tutors->pluck('user_id')->toArray();
         $this->selectedTutors = $course->tutors;
         $this->file = null; // Don't set file to existing thumbnail - only set when new file is uploaded
+        $this->videoFile = null; // Don't set videoFile to existing video - only set when new file is uploaded
         $this->learnDetails = $course->learning_outcomes;
         $this->audienceDetails = $course->target_audience;
         $this->requirements = $course->requirements;
@@ -269,6 +278,13 @@ class CreateCourse extends Component
         $videoPath = $this->videoFile instanceof \Illuminate\Http\UploadedFile
             ? $this->uploadVideo()
             : ($this->existingVideo ?: '');
+
+        \Log::info('Updating course', [
+            'course_id' => $this->courseId,
+            'video_path' => $videoPath ?: '(empty)',
+            'existing_video' => $this->existingVideo ?? '(none)',
+            'has_new_video_file' => $this->videoFile instanceof \Illuminate\Http\UploadedFile
+        ]);
 
         // Normalize is_paid value to match enum ('free' or 'paid')
         $isPaid = null;

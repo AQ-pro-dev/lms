@@ -25,3 +25,5 @@ return new class extends Migration
         DB::statement('ALTER TABLE `courses` MODIFY `video_path` VARCHAR(255) NOT NULL');
     }
 };
+
+

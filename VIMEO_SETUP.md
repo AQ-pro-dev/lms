@@ -124,3 +124,5 @@ VIMEO_ACCESS=v1.abc123def456ghi789jkl012mno345pqr678stu901vwx234yz
 - Check Laravel logs: `storage/logs/laravel.log`
 - Check Vimeo API documentation: https://developer.vimeo.com/api/guides/videos/upload
 - Verify your app has the correct permissions in Vimeo Developer Portal
+
+

@@ -1,5 +1,8 @@
 @php
     $user = auth()->user();
+    if (!$user) {
+        return redirect()->route('login');
+    }
     $tutorRequest = $user->tutor ?? null;
     $isTutorVerified = $tutorRequest ? $user->tutor->is_verified : false;
     $isAdmin = $user->role_id == 1;

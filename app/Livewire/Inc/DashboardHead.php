@@ -23,7 +23,11 @@ class DashboardHead extends Component
     public function mount()
     {
         $user = Auth::user();
-        $this->username = $user->first_name . ' ' . $user->last_name;
+        if (!$user) {
+            return redirect()->route('login');
+        }
+        // Use name attribute if available, otherwise fallback to first_name/last_name or username
+        $this->username = $user->name ?? trim(($user->first_name ?? '') . ' ' . ($user->last_name ?? '')) ?: $user->username ?? 'User';
         $this->loadnotifications();
     }
 
@@ -78,6 +82,11 @@ class DashboardHead extends Component
     public function loadnotifications()
     {
         $user = Auth::user();
+        if (!$user) {
+            $this->notifications = collect([]);
+            $this->unreadCount = 0;
+            return;
+        }
         $this->notifications = Notification::where('user_id', $user->id)
             ->orderBy('created_at', 'desc')
             ->where('read_status', false)

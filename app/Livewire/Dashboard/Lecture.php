@@ -36,6 +36,11 @@ class Lecture extends Component
 
     public function mount()
     {
+        // Check if user is authenticated
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+        
         $this->loadCourses();
         // Initialize with one lecture input block
         $this->initializeLectureBlock();
@@ -44,6 +49,13 @@ class Lecture extends Component
     public function loadCourses()
     {
         $user = Auth::user();
+        
+        // Check if user is authenticated
+        if (!$user) {
+            $this->courses = collect([]);
+            return;
+        }
+        
         $roleId = $user->role_id;
         
         // Build query for recorded courses
@@ -124,6 +136,12 @@ class Lecture extends Component
 
     public function submit()
     {
+        // Check if user is authenticated
+        if (!Auth::check()) {
+            $this->alert('error', 'You must be logged in to upload lectures.');
+            return redirect()->route('login');
+        }
+        
         $this->validate();
 
         // Check for duplicate orders in the current lectures
