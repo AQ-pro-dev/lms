@@ -32,7 +32,14 @@
                                     {{ $trendingCourse->user->last_name }}</span>
                             </div>
                         </div>
-                        <p class="card-text ">{{ $trendingCourse->description }}</p>
+                        <p class="card-text">
+                            {{ \Illuminate\Support\Str::limit($trendingCourse->description, 100) }}
+                            @if ($trendingCourse->course_type == 'recorded')
+                                <a href="{{ route('onsite.course.details', $trendingCourse->id) }}" class="text-primary text-decoration-none">Read More</a>
+                            @else
+                                <a href="{{ route('course.details', $trendingCourse->id) }}" class="text-primary text-decoration-none">Read More</a>
+                            @endif
+                        </p>
                         <div class="post-details d-flex align-items-center">
                             <span class="date">Publish
                                 :{{ $trendingCourse->created_at->diffForHumans() }}</span>

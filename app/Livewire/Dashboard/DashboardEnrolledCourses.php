@@ -37,6 +37,12 @@ class DashboardEnrolledCourses extends Component
                 } elseif ($progress > 0 && $progress < 100) {
                     $this->activeCourses[] = $courseData;
                 } elseif ($progress == 100) {
+                    // Fetch certificate if exists
+                    $certificate = \App\Models\Certificate::where('user_id', $userId)
+                        ->where('course_id', $course->id)
+                        ->first();
+                    
+                    $courseData['certificate_url'] = $certificate ? $certificate->certificate_path : null;
                     $this->completedCourses[] = $courseData;
                 }
             }

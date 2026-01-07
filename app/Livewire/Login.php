@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Log;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Login extends Component
@@ -49,31 +50,41 @@ class Login extends Component
     // }
     public function login()
     {
-        $this->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
+        try {
+            $this->validate([
+                'email' => 'required|email',
+                'password' => 'required',
+            ]);
 
-        $user = User::where('email', $this->email)->first();
-        //dd($this->email, $this->password);
-        if (!$user) {
-            $this->alert('warning', 'Invalid email');
+            $user = User::where('email', $this->email)->first();
+            
+            if (!$user) {
+                $this->alert('warning', 'Invalid email');
+                return;
+            }
+
+            if (!Hash::check($this->password, $user->password)) {
+                $this->alert('warning', 'Invalid email');
+                return;
+            }
+
+            if (!$user->hasVerifiedEmail()) {
+                $this->alert('warning', 'Please verify your email before logging in.');
+                return;
+            }
+
+            Auth::login($user);
+
+            return redirect()->route('dashboard.settings');
+        } catch (\Exception $e) {
+            Log::error('Login error: ' . $e->getMessage(), [
+                'exception' => $e,
+                'email' => $this->email ?? null,
+            ]);
+            
+            $this->alert('error', 'An error occurred during login. Please try again.');
             return;
         }
-
-        if (!Hash::check($this->password, $user->password)) {
-            $this->alert('warning', 'Invalid email');
-            return;
-        }
-
-        if (!$user->hasVerifiedEmail()) {
-            $this->alert('warning', 'Please verify your email before logging in.');
-            return;
-        }
-
-        Auth::login($user);
-
-        return redirect()->route('dashboard.settings');
     }
 
 

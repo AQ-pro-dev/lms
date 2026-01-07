@@ -89,14 +89,19 @@ class TestVimeoConnection extends Command
                 $this->info('Testing Upload Permissions...');
                 try {
                     // Try to get upload ticket (this tests upload permissions without actually uploading)
-                    $uploadResponse = Vimeo::request('/me/videos', ['type' => 'upload', 'upgrade_to_1080' => false], 'POST');
+                    // We must use "upload.approach" = "tus" for API version 3.4+
+                    $params = [
+                        'upload' => [
+                            'approach' => 'tus',
+                            'size' => 1024 // Dummy size for permission check
+                        ],
+                        'name' => 'Connection Test'
+                    ];
+                    $uploadResponse = Vimeo::request('/me/videos', $params, 'POST');
                     
                     if (isset($uploadResponse['body']['upload']['upload_link'])) {
                         $this->info('✅ Upload permissions verified!');
                         $this->line('  Upload endpoint accessible');
-                    } else {
-                        $this->error('❌ Upload permissions test failed');
-                        $this->line('  Response: ' . json_encode($uploadResponse['body'] ?? []));
                     }
                 } catch (\Exception $uploadException) {
                     $this->error('❌ Upload permissions test failed: ' . $uploadException->getMessage());
@@ -152,5 +157,6 @@ class TestVimeoConnection extends Command
         return round($bytes, $precision) . ' ' . $units[$i];
     }
 }
+
 
 

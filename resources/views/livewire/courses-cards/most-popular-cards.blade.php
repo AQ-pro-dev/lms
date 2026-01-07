@@ -42,7 +42,14 @@
                                     {{ $mostPopularCourse->user->last_name }}</span>
                             </div>
                         </div>
-                        <p class="card-text ">{{ $mostPopularCourse->description }}</p>
+                        <p class="card-text">
+                            {{ \Illuminate\Support\Str::limit($mostPopularCourse->description, 100) }}
+                            @if ($mostPopularCourse->course_type == 'recorded')
+                                <a href="{{ route('onsite.course.details', $mostPopularCourse->id) }}" class="text-primary text-decoration-none">Read More</a>
+                            @else
+                                <a href="{{ route('course.details', $mostPopularCourse->id) }}" class="text-primary text-decoration-none">Read More</a>
+                            @endif
+                        </p>
                         <div class="post-details d-flex align-items-center">
                             <span class="date">Publish: {{ $mostPopularCourse->created_at->diffForHumans() }}</span>
                         </div>

@@ -32,7 +32,14 @@
                                     {{ $newCourse->user->last_name }}</span>
                             </div>
                         </div>
-                        <p class="card-text ">{{ $newCourse->description }}</p>
+                        <p class="card-text">
+                            {{ \Illuminate\Support\Str::limit($newCourse->description, 100) }}
+                            @if ($newCourse->course_type == 'recorded')
+                                <a href="{{ route('onsite.course.details', $newCourse->id) }}" class="text-primary text-decoration-none">Read More</a>
+                            @else
+                                <a href="{{ route('course.details', $newCourse->id) }}" class="text-primary text-decoration-none">Read More</a>
+                            @endif
+                        </p>
                         <div class="post-details d-flex align-items-center">
                             <span class="date">Publish
                                 :{{ $newCourse->created_at->diffForHumans() }}</span>

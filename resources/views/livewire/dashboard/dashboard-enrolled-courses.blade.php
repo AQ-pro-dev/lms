@@ -38,7 +38,10 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title my-3">{{ $course['course']->title }}</h5>
-                            <p>{{ $course['course']->description }}</p>
+                            <p>
+                                {{ \Illuminate\Support\Str::limit($course['course']->description, 100) }}
+                                <a href="{{ route('course.details', $course['course']->id) }}" class="text-primary text-decoration-none">Read More</a>
+                            </p>
 
                             <!-- Progress Bar with percentage inside -->
                             <p class="d-flex justify-content-end">Compelete {{ $course['progress'] }}%</p>
@@ -50,7 +53,7 @@
                             </div>
 
                             <div class="text-center">
-                                <a href="#" class="button-primary mt-3">Start Learning</a>
+                                <a href="{{ route('dashboard.view.lectures', ['courseId' => $course['course']->id]) }}" class="button-primary mt-3">Start Learning</a>
                             </div>
                         </div>
                     </div>
@@ -69,7 +72,10 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title my-3">{{ $course['course']->title }}</h5>
-                            <p>{{ $course['course']->description }}</p>
+                            <p>
+                                {{ \Illuminate\Support\Str::limit($course['course']->description, 100) }}
+                                <a href="{{ route('course.details', $course['course']->id) }}" class="text-primary text-decoration-none">Read More</a>
+                            </p>
 
                             <!-- Progress Bar with percentage inside -->
                             <p class="d-flex justify-content-end">Compelete {{ $course['progress'] }}%</p>
@@ -79,7 +85,7 @@
                                 </div>
                             </div>
                             <div class="text-center">
-                                <a href="#" class="button-primary mt-3">Continue Learning</a>
+                                <a href="{{ route('dashboard.view.lectures', ['courseId' => $course['course']->id]) }}" class="button-primary mt-3">Continue Learning</a>
                             </div>
                         </div>
                     </div>
@@ -98,7 +104,10 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title my-3">{{ $course['course']->title }}</h5>
-                            <p>{{ $course['course']->description }}</p>
+                            <p>
+                                {{ \Illuminate\Support\Str::limit($course['course']->description, 100) }}
+                                <a href="{{ route('course.details', $course['course']->id) }}" class="text-primary text-decoration-none">Read More</a>
+                            </p>
 
                             <!-- Progress Bar with percentage inside -->
                             <p class="d-flex justify-content-end">Compelete {{ $course['progress'] }}%</p>
@@ -110,7 +119,11 @@
                             </div>
 
                             <div class="text-center">
-                                <a href="#" class="button-primary mt-3">View Certificate</a>
+                                @if (isset($course['certificate_url']) && $course['certificate_url'])
+                                    <a href="{{ asset($course['certificate_url']) }}" target="_blank" class="button-primary mt-3">View Certificate</a>
+                                @else
+                                    <a href="{{ route('dashboard.view.lectures', ['courseId' => $course['course']->id]) }}" class="button-primary mt-3">Generate Certificate</a>
+                                @endif
                             </div>
                         </div>
                     </div>

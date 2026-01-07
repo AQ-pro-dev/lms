@@ -7,6 +7,7 @@ use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class DashboardSettings extends Component
@@ -36,20 +37,29 @@ class DashboardSettings extends Component
 
     public function mount()
     {
-        $this->user = Auth::user();
-        $this->firstName = $this->user->first_name;
-        $this->lastName = $this->user->last_name;
-        $this->userName = $this->user->username;
-        $this->phone = $this->user->phone;
-        $this->bio = $this->user->bio;
-        $this->timezone = $this->user->timezone ?? '';
-        $this->facebook = $this->user->facebook;
-        $this->twitter = $this->user->twitter;
-        $this->linkedin = $this->user->linkedin;
-        $this->website = $this->user->website;
-        $this->github = $this->user->github;
-        $this->timezoneOptions = array_values(\DateTimeZone::listIdentifiers(\DateTimeZone::ALL));
-        // dd($this->timezoneOptions);
+        try {
+            $this->user = Auth::user();
+            
+            if (!$this->user) {
+                return redirect()->route('login');
+            }
+            
+            $this->firstName = $this->user->first_name ?? '';
+            $this->lastName = $this->user->last_name ?? '';
+            $this->userName = $this->user->username ?? '';
+            $this->phone = $this->user->phone ?? '';
+            $this->bio = $this->user->bio ?? '';
+            $this->timezone = $this->user->timezone ?? '';
+            $this->facebook = $this->user->facebook ?? '';
+            $this->twitter = $this->user->twitter ?? '';
+            $this->linkedin = $this->user->linkedin ?? '';
+            $this->website = $this->user->website ?? '';
+            $this->github = $this->user->github ?? '';
+            $this->timezoneOptions = array_values(\DateTimeZone::listIdentifiers(\DateTimeZone::ALL));
+        } catch (\Exception $e) {
+            Log::error('DashboardSettings mount error: ' . $e->getMessage());
+            // Silently handle errors to prevent breaking the page
+        }
     }
 
 

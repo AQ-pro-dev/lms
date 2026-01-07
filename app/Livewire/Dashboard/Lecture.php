@@ -170,6 +170,38 @@ class Lecture extends Component
             return;
         }
         
+        // Validation removed as per user request to allow API to handle errors directly
+        /*
+        // CRITICAL: Validate access token length - Vimeo tokens are 128+ characters
+        //$vimeoToken = config('services.vimeo.token');   // ALWAYS read from cached config
+
+        if (empty($vimeoToken)) {
+            $this->alert('error', 'Vimeo token not found. Please configure VIMEO_ACCESS_TOKEN in .env');
+            Log::critical('Vimeo token missing in config/services.php');
+            return;
+        }
+
+        $tokenLength = strlen($vimeoToken);
+        //$tokenLength = strlen($vimeoToken);
+        if ($tokenLength < 120) {
+
+            $errorMsg  = 'Vimeo access token is invalid! Current token is only ' . $tokenLength . ' characters. ';
+            $errorMsg .= 'Vimeo access tokens must be 128+ characters. ';
+            $errorMsg .= 'Please generate a NEW access token at https://developer.vimeo.com/ with the "video.upload" scope. ';
+            $errorMsg .= 'See VIMEO_TOKEN_GUIDE.md for detailed instructions.';
+
+            $this->alert('error', $errorMsg);
+
+            Log::error('Vimeo access token too short', [
+                'token_length' => $tokenLength,
+                'token_prefix' => substr($vimeoToken, 0, 20) . '...',
+                'hint' => 'Token must be loaded via config(services.vimeo.token).'
+            ]);
+
+            return;
+        }
+        */
+        
         // Log that credentials are configured (without exposing secrets)
         Log::info('Vimeo credentials verified', [
             'client_id_length' => strlen($vimeoClient),
@@ -397,8 +429,15 @@ class Lecture extends Component
                 
                 // Add helpful hint for permission errors
                 if (stripos($errorDetails, "can't upload") !== false || 
-                    stripos($errorDetails, "get in touch with the app's creator") !== false) {
-                    $errorMessage .= ' | SOLUTION: Your access token must have the "video.upload" scope AND must be generated for the SAME Vimeo app as your Client ID/Secret. Make sure Client ID, Client Secret, and Access Token all belong to the same app.';
+                    stripos($errorDetails, "get in touch with the app's creator") !== false ||
+                    stripos($errorDetails, "missing a user ID") !== false) {
+                    $tokenLength = strlen($vimeoToken ?? '');
+                    $hint = 'SOLUTION: ';
+                    if ($tokenLength < 50) {
+                        $hint .= 'Your access token is too short (' . $tokenLength . ' chars). Vimeo access tokens should be 128+ characters. ';
+                    }
+                    $hint .= 'Generate a NEW access token at https://developer.vimeo.com/ with the "video.upload" scope. Make sure Client ID, Client Secret, and Access Token all belong to the SAME Vimeo app. See FIX_VIMEO_UPLOAD.md for detailed steps.';
+                    $errorMessage .= ' | ' . $hint;
                 }
                 
                 $errorMessages[] = $errorMessage;

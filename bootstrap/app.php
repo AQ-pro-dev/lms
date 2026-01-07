@@ -16,5 +16,14 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+        // Handle exceptions for Livewire requests to ensure JSON responses
+        $exceptions->render(function (\Throwable $e, $request) {
+            // For Livewire requests, ensure we return JSON even if there's an error
+            if ($request->header('X-Livewire') || $request->wantsJson()) {
+                // Clean any output that might have been generated
+                if (ob_get_level() > 0) {
+                    ob_clean();
+                }
+            }
+        });
     })->create();

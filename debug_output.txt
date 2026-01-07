@@ -1,0 +1,13 @@
+Debugging Vimeo Headers (Standalone - File Log)...
+
+Client ID: 26148...
+Access Token: a0a3a...
+
+Testing Parameter Variations with Default Headers...
+Test 1: Legacy Parameters (type=upload)
+❌ Legacy: FAILED: Something strange occurred. Please try again.
+   DevMsg: To access upload features for API version 3.4 when your app defaults to a different API version, include the `Accept` header with your request, and set its value to `3.4`. For more details, see our versioning documentation at https://developer.vimeo.com/api/common-formats#versioning.
+----------------------------------------
+Test 2: Modern Parameters (upload.approach=tus)
+✅ Modern: SUCCESS
+----------------------------------------

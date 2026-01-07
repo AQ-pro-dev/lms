@@ -171,7 +171,13 @@
 
                                             </div>
                                         </div>
-                                        <p class="card-text">{{ $item->description }}
+                                        <p class="card-text">
+                                            {{ \Illuminate\Support\Str::limit($item->description, 100) }}
+                                            @if ($item->course_type == 'recorded')
+                                                <a href="{{ route('onsite.course.details', $item->id) }}" class="text-primary text-decoration-none">Read More</a>
+                                            @else
+                                                <a href="{{ route('course.details', $item->id) }}" class="text-primary text-decoration-none">Read More</a>
+                                            @endif
                                         </p>
                                         <div class="post-details">
                                             <div>
