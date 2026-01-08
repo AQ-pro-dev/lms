@@ -21,6 +21,8 @@ class EarningsTab extends Component
     {
         $user = Auth::user();
 
+
+
         $courses = Course::where('user_id', $user->id)
             ->where('is_published', true)
             ->where('is_drafted', false)

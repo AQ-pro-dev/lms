@@ -99,7 +99,7 @@ Route::middleware('auth')->group(
         Route::get('/dashboard/system-settings', SystemSettings::class)->name('dashboard.system.settings');
     }
 );
-// Route::middleware(['checkrole:1,2'])->group(function () {
+Route::middleware(['checkrole:1,2'])->group(function () {
 //quiz
 Route::get('/quizzes/create/{lectureId}', QuizCreate::class)->name('quizzes.create');
 Route::get('dashboard/view/lectures/{courseId}', ViewLectures::class)->name('dashboard.view.lectures');
@@ -111,7 +111,7 @@ Route::get('/dashboard/course-analytics', CourseAnalytics::class)->name('dashboa
 Route::get('/dashboard/courses/create/{courseId?}', CreateCourse::class)->name('dashboard.create.course');
 Route::get('/dashboard/create/class/{classId?}', ClassForm::class)->name('dashboard.create.class');
 Route::get('/dashboard/create/class/{eventId?}', ClassForm::class)->name('dashboard.create.event');
-// });
+});
 Route::get('/dashboard/student/view/{id?}', StudentView::class)->name('dashboard.student.view');
 
 Route::get('/certificate', [PaymentController::class, 'certifictes'])->name('certificate.index');

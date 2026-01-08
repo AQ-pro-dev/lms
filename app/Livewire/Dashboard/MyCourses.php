@@ -31,26 +31,51 @@ class MyCourses extends Component
 
     public function refreshCoursedata()
     {
-        $this->publishedCourses = Course::where('user_id', Auth::id())
-            ->where('is_published', true)
-            ->where('is_drafted', false)
-            ->get();
+        $user = Auth::user();
 
-        $this->pendingCourses = Course::where('user_id', Auth::id())
-            ->where('is_published', false)
-            ->where('is_drafted', false)
-            ->get();
+        // Check if user is Admin (role_id == 1)
+        if ($user->role_id == 1) {
+            // Admin sees ALL courses
+            $this->publishedCourses = Course::withCount('bookings')
+                ->where('is_published', true)
+                ->where('is_drafted', false)
+                ->get();
 
-        $this->draftedCourses = Course::where('user_id', Auth::id())
-            ->where('is_published', false)
-            ->where('is_drafted', true)
-            ->get();
+            $this->pendingCourses = Course::withCount('bookings')
+                ->where('is_published', false)
+                ->where('is_drafted', false)
+                ->get();
+
+            $this->draftedCourses = Course::withCount('bookings')
+                ->where('is_published', false)
+                ->where('is_drafted', true)
+                ->get();
+        } else {
+            // Instructor sees ONLY their own courses
+            $this->publishedCourses = Course::where('user_id', $user->id) 
+                ->where('is_published', true)
+                ->where('is_drafted', false)
+                ->get();
+
+            $this->pendingCourses = Course::where('user_id', $user->id)
+                ->where('is_published', false)
+                ->where('is_drafted', false)
+                ->get();
+
+            $this->draftedCourses = Course::where('user_id', $user->id)
+                ->where('is_published', false)
+                ->where('is_drafted', true)
+                ->get();
+        }
     }
 
     public function confirmDelete($id)
     {
         $this->courseId = $id;
     }
+
+    public $enrolledStudents = [];
+    public $selectedCourseTitle;
 
     public function destroyCourse()
     {
@@ -59,6 +84,17 @@ class MyCourses extends Component
         $this->reset(['courseId']);
         $this->dispatch('close-modal'); // Close modal
         $this->refreshCoursedata();
+    }
+
+    public function viewStudents($courseId)
+    {
+        $course = Course::with('bookings.user')->findOrFail($courseId);
+        $this->selectedCourseTitle = $course->title;
+        
+        // Extract unique users from bookings
+        $this->enrolledStudents = $course->bookings->map(function ($booking) {
+            return $booking->user;
+        })->unique('id')->values();
     }
 
     public function render()

@@ -16,8 +16,12 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next, ...$role_ids): Response
     {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
         // Check if the user is authenticated and their role matches one of the allowed roles
-        if (Auth::check() && in_array(Auth::user()->role_id, $role_ids)) {
+        if (in_array(Auth::user()->role_id, $role_ids)) {
             return $next($request);
         }
 

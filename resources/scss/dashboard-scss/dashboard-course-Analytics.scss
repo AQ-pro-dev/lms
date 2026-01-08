@@ -17,6 +17,7 @@
         opacity: 0;
     }
 }
+
 .course-analytics {
     border-left: 1px solid #b2b4b7;
     flex: 1;
@@ -99,17 +100,20 @@
             }
         }
     }
+
     .most-popular-courses-table {
         h4 {
             color: #212327;
             font-size: 20px;
         }
     }
+
     .Review-table {
         h4 {
             color: #212327;
             font-size: 20px;
         }
+
         .card-table {
             .table {
                 tbody {
@@ -218,6 +222,7 @@
         font-weight: 400;
         line-height: 22px;
         color: #757c8e;
+
         &:hover {
             text-decoration: underline;
         }
@@ -321,6 +326,7 @@
                             width: 20px;
                             height: 20px;
                         }
+
                         padding: 10px;
                         font-size: 14px;
                         border-bottom: 1px solid #dee2e6;
@@ -420,23 +426,23 @@
                         padding: 16px;
                         border-bottom: 1px solid #b2b4b7;
 
-                        &:first-child {
-                            min-width: 500px;
-                            width: 60%;
-                        }
+                        // &:first-child {
+                        //     min-width: 500px;
+                        //     width: 60%;
+                        // }
 
-                        &:nth-child(2),
-                        &:nth-child(3) {
-                            min-width: 132px;
-                            width: 15%;
-                            text-align: center;
-                        }
+                        // &:nth-child(2),
+                        // &:nth-child(3) {
+                        //     min-width: 132px;
+                        //     width: 15%;
+                        //     text-align: center;
+                        // }
 
-                        &:last-child {
-                            min-width: 80px;
-                            width: 10%;
-                            text-align: right;
-                        }
+                        // &:last-child {
+                        //     min-width: 80px;
+                        //     width: 10%;
+                        //     text-align: right;
+                        // }
                     }
                 }
 
@@ -561,7 +567,7 @@
 
     .table-responsive {
         .statements-table {
-            min-width: 954px;
+            // min-width: 954px;
             font-size: 14px;
             border: 1px solid #cdcfd5;
 
